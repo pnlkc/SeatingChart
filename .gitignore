@@ -7,18 +7,85 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+venv/
+.venv/
+env/
+pip-log.txt
 
-# Editor directories and files
+# Build outputs
+dist/
+dist-ssr/
+build/
+out/
+target/
+*.exe
+*.dll
+*.so
+
+# IDEs and editors
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# Environment variables and credentials
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+id_rsa
+google-services.json
+
+# AI models and weights
+*.onnx
+*.pt
+*.pth
+*.pkl
+*.bin
+*.h5
+*.ckpt
+*.pb
+*.safetensors
+
+# Temporary/Generated Media Files (Exclude design assets under public/src)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.wav
+*.flac
+!public/**/*
+!src/assets/**/*
+
+# Agent/IDE local configs and memory
+.harness/memory.md
+.gemini/
