@@ -1,0 +1,171 @@
+:root {
+  /* 다크 테마 컬러 디자인 토큰 */
+  --bg-main: #090a10;
+  --bg-glass: rgba(17, 20, 32, 0.75);
+  --bg-glass-card: rgba(22, 26, 46, 0.45);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-focus: rgba(99, 102, 241, 0.5);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-blue: #3b82f6;
+  --accent-indigo: #6366f1;
+  --accent-purple: #8b5cf6;
+  
+  /* 구역별 HSL 상태 변수 */
+  --seat-avail-bg: hsla(217, 91%, 60%, 0.12);
+  --seat-avail-border: hsla(217, 91%, 60%, 0.35);
+  --seat-avail-glow: hsla(217, 91%, 60%, 0.25);
+  --seat-avail-text: #60a5fa;
+
+  --seat-occ-bg: hsla(271, 91%, 65%, 0.15);
+  --seat-occ-border: hsla(271, 91%, 65%, 0.4);
+  --seat-occ-glow: hsla(271, 91%, 65%, 0.3);
+  --seat-occ-text: #c084fc;
+
+  --seat-fac-bg: hsla(35, 100%, 50%, 0.12);
+  --seat-fac-border: hsla(35, 100%, 50%, 0.45);
+  --seat-fac-glow: hsla(35, 100%, 50%, 0.25);
+  --seat-fac-text: #fb923c;
+
+  --facility-bg: hsla(160, 84%, 39%, 0.12);
+  --facility-border: hsla(160, 84%, 39%, 0.35);
+  --facility-text: #34d399;
+
+  --corridor-bg: rgba(255, 255, 255, 0.08);
+  --corridor-border: rgba(255, 255, 255, 0.15);
+
+  --restricted-bg: hsla(350, 80%, 55%, 0.12);
+  --restricted-border: hsla(350, 80%, 55%, 0.35);
+  --restricted-text: #f87171;
+
+  /* 디자인 곡률 토큰 변수 */
+  --radius-cell: 6px;
+  --radius-tab: 8px;
+  --radius-card: 12px;
+
+  /* 그림자 디자인 토큰 */
+  --shadow-header: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --shadow-viewport: inset 0 0 40px rgba(0, 0, 0, 0.4);
+  --shadow-cell-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-facility: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-seat: 0 2px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-seat-occupied: 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  /* 그라데이션 텍스트 토큰 */
+  --gradient-header-text: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+
+  --sans-font: 'Outfit', 'Inter', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  
+  font-family: var(--sans-font);
+  color-scheme: dark;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.18) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(239, 44%, 12%, 1) 0, transparent 50%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 스크롤바 커스텀 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(9, 10, 16, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 라이트 테마 디자인 토큰 정의 */
+.light-theme {
+  --bg-main: #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-card: rgba(241, 245, 249, 0.75);
+  --border-glass: rgba(15, 23, 42, 0.08);
+  --border-glass-focus: rgba(99, 102, 241, 0.65);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --seat-avail-bg: hsla(217, 91%, 60%, 0.08);
+  --seat-avail-border: hsla(217, 91%, 60%, 0.45);
+  --seat-avail-glow: rgba(59, 130, 246, 0.15);
+  --seat-avail-text: #1d4ed8;
+
+  --seat-occ-bg: hsla(271, 91%, 65%, 0.08);
+  --seat-occ-border: hsla(271, 91%, 65%, 0.5);
+  --seat-occ-glow: rgba(139, 92, 246, 0.15);
+  --seat-occ-text: #6d28d9;
+
+  --seat-fac-bg: hsla(35, 100%, 50%, 0.08);
+  --seat-fac-border: hsla(35, 100%, 50%, 0.5);
+  --seat-fac-glow: rgba(249, 115, 22, 0.15);
+  --seat-fac-text: #c2410c;
+
+  --facility-bg: hsla(160, 84%, 39%, 0.08);
+  --facility-border: hsla(160, 84%, 39%, 0.45);
+  --facility-text: #047857;
+
+  --corridor-bg: rgba(0, 0, 0, 0.04);
+  --corridor-border: rgba(0, 0, 0, 0.1);
+
+  --restricted-bg: hsla(350, 80%, 55%, 0.08);
+  --restricted-border: hsla(350, 80%, 55%, 0.45);
+  --restricted-text: #b91c1c;
+
+  /* 밝은모드용 부드러운 그림자 조정 */
+  --shadow-header: 0 4px 18px rgba(15, 23, 42, 0.05);
+  --shadow-viewport: inset 0 0 20px rgba(15, 23, 42, 0.05);
+  --shadow-cell-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-facility: 0 2px 8px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-seat: 0 1px 4px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-seat-occupied: 0 1px 4px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  /* 밝은모드용 텍스트 그라데이션 - 고가독성 */
+  --gradient-header-text: linear-gradient(135deg, #0f172a 0%, #4f46e5 100%);
+  
+  color-scheme: light;
+}
+
+body.light-theme {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(210, 40%, 96%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(215, 60%, 92%, 0.6) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(220, 30%, 94%, 1) 0, transparent 50%);
+  background-color: #f1f5f9;
+}

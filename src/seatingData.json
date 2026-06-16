@@ -1,0 +1,5456 @@
+{
+  "3F": {
+    "dimensions": {
+      "rows": 23,
+      "cols": 17
+    },
+    "mergeCells": [
+      {
+        "startRow": 18,
+        "startCol": 11,
+        "endRow": 19,
+        "endCol": 11,
+        "value": "🛗 엘리베이터"
+      },
+      {
+        "startRow": 9,
+        "startCol": 2,
+        "endRow": 15,
+        "endCol": 2,
+        "value": "👥 회의 공간"
+      },
+      {
+        "startRow": 9,
+        "startCol": 10,
+        "endRow": 15,
+        "endCol": 10,
+        "value": "👥 회의 공간"
+      },
+      {
+        "startRow": 3,
+        "startCol": 9,
+        "endRow": 4,
+        "endCol": 10,
+        "value": "🚻 화장실"
+      },
+      {
+        "startRow": 5,
+        "startCol": 1,
+        "endRow": 6,
+        "endCol": 1,
+        "value": "🚷 비상구\n(사용불가)"
+      },
+      {
+        "startRow": 5,
+        "startCol": 2,
+        "endRow": 6,
+        "endCol": 10,
+        "value": "복도"
+      },
+      {
+        "startRow": 12,
+        "startCol": 15,
+        "endRow": 17,
+        "endCol": 16,
+        "value": "세미나실"
+      },
+      {
+        "startRow": 7,
+        "startCol": 6,
+        "endRow": 8,
+        "endCol": 6,
+        "value": "🏝️ 오아시스"
+      },
+      {
+        "startRow": 1,
+        "startCol": 11,
+        "endRow": 2,
+        "endCol": 11,
+        "value": "🪜 계단"
+      },
+      {
+        "startRow": 3,
+        "startCol": 11,
+        "endRow": 17,
+        "endCol": 11,
+        "value": "복도"
+      },
+      {
+        "startRow": 11,
+        "startCol": 6,
+        "endRow": 17,
+        "endCol": 6,
+        "value": "테이블"
+      },
+      {
+        "startRow": 5,
+        "startCol": 12,
+        "endRow": 11,
+        "endCol": 16,
+        "value": "🚷 사용불가 🚷 CLUSTER X1 코딩스튜디오 LUNA"
+      },
+      {
+        "startRow": 12,
+        "startCol": 12,
+        "endRow": 17,
+        "endCol": 14,
+        "value": "🚷 사용불가 🚷"
+      }
+    ],
+    "grid": [
+      [
+        {
+          "r": 0,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 1,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 2,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 3,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 9,
+          "value": "🚻 화장실",
+          "type": "facility"
+        },
+        {
+          "r": 3,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 11,
+          "value": "복도",
+          "type": "corridor"
+        },
+        {
+          "r": 3,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 4,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 5,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 1,
+          "value": "🪜 계단",
+          "type": "facility"
+        },
+        {
+          "r": 5,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 12,
+          "value": "🚷 사용불가 🚷 CLUSTER X1 코딩스튜디오 LUNA",
+          "type": "facility"
+        },
+        {
+          "r": 5,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 6,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 7,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 2,
+          "value": "cx2r8s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 3,
+          "value": "cx2r7s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 6,
+          "value": "🏝️ 오아시스",
+          "type": "facility"
+        },
+        {
+          "r": 7,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 9,
+          "value": "cx2r2s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 10,
+          "value": "cx2r1s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 8,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 2,
+          "value": "cx2r8s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 3,
+          "value": "cx2r7s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 4,
+          "value": "cx2r6s1",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 8,
+          "value": "cx2r3s1",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 9,
+          "value": "cx2r2s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 10,
+          "value": "cx2r1s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 9,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 2,
+          "value": "👥 회의 공간",
+          "type": "facility"
+        },
+        {
+          "r": 9,
+          "c": 3,
+          "value": "cx2r7s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 4,
+          "value": "cx2r6s2",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 5,
+          "value": "cx2r5s1",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 7,
+          "value": "cx2r4s1",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 8,
+          "value": "cx2r3s2",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 9,
+          "value": "cx2r2s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 10,
+          "value": "👥 회의 공간",
+          "type": "facility"
+        },
+        {
+          "r": 9,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 10,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 3,
+          "value": "cx2r7s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 4,
+          "value": "cx2r6s3",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 5,
+          "value": "cx2r5s2",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 7,
+          "value": "cx2r4s2",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 8,
+          "value": "cx2r3s3",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 9,
+          "value": "cx2r2s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 11,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 3,
+          "value": "cx2r7s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 4,
+          "value": "cx2r6s4",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 5,
+          "value": "cx2r5s3",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 6,
+          "value": "테이블",
+          "type": "facility"
+        },
+        {
+          "r": 11,
+          "c": 7,
+          "value": "cx2r4s3",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 8,
+          "value": "cx2r3s4",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 9,
+          "value": "cx2r2s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 12,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 12,
+          "value": "🚷 사용불가 🚷",
+          "type": "facility"
+        },
+        {
+          "r": 12,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 15,
+          "value": "세미나실",
+          "type": "facility"
+        },
+        {
+          "r": 12,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 13,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 3,
+          "value": "cx2r7s6",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 4,
+          "value": "cx2r6s5",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 5,
+          "value": "cx2r5s4",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 7,
+          "value": "cx2r4s4",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 8,
+          "value": "cx2r3s5",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 9,
+          "value": "cx2r2s6",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 14,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 3,
+          "value": "cx2r7s7",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 4,
+          "value": "cx2r6s6",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 5,
+          "value": "cx2r5s5",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 7,
+          "value": "cx2r4s5",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 8,
+          "value": "cx2r3s6",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 9,
+          "value": "cx2r2s7",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 15,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 3,
+          "value": "cx2r7s8",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 4,
+          "value": "cx2r6s7",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 5,
+          "value": "cx2r5s6",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 7,
+          "value": "cx2r4s6",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 8,
+          "value": "cx2r3s7",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 9,
+          "value": "cx2r2s8",
+          "type": "seat"
+        },
+        {
+          "r": 15,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 16,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 2,
+          "value": "cx2r8s3",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 3,
+          "value": "cx2r7s9",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 4,
+          "value": "cx2r6s8",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 8,
+          "value": "cx2r3s8",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 9,
+          "value": "cx2r2s9",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 10,
+          "value": "cx2r1s3",
+          "type": "seat"
+        },
+        {
+          "r": 16,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 17,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 2,
+          "value": "cx2r8s4",
+          "type": "seat"
+        },
+        {
+          "r": 17,
+          "c": 3,
+          "value": "cx2r7s10",
+          "type": "seat"
+        },
+        {
+          "r": 17,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 9,
+          "value": "cx2r2s10",
+          "type": "seat"
+        },
+        {
+          "r": 17,
+          "c": 10,
+          "value": "cx2r1s4",
+          "type": "seat"
+        },
+        {
+          "r": 17,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 18,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 11,
+          "value": "🛗 엘리베이터",
+          "type": "facility"
+        },
+        {
+          "r": 18,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 19,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 19,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 20,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 20,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 21,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 21,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 22,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 22,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        }
+      ]
+    ]
+  },
+  "5F": {
+    "dimensions": {
+      "rows": 19,
+      "cols": 25
+    },
+    "mergeCells": [
+      {
+        "startRow": 3,
+        "startCol": 19,
+        "endRow": 4,
+        "endCol": 23,
+        "value": "집현전"
+      },
+      {
+        "startRow": 1,
+        "startCol": 14,
+        "endRow": 2,
+        "endCol": 14,
+        "value": "🪜\n계단"
+      },
+      {
+        "startRow": 3,
+        "startCol": 12,
+        "endRow": 4,
+        "endCol": 13,
+        "value": "🚻\n화장실"
+      },
+      {
+        "startRow": 3,
+        "startCol": 14,
+        "endRow": 14,
+        "endCol": 14,
+        "value": "복도"
+      },
+      {
+        "startRow": 5,
+        "startCol": 1,
+        "endRow": 6,
+        "endCol": 1,
+        "value": "🚷 비상구\n(사용불가)"
+      },
+      {
+        "startRow": 5,
+        "startCol": 5,
+        "endRow": 6,
+        "endCol": 13,
+        "value": "복도"
+      },
+      {
+        "startRow": 15,
+        "startCol": 14,
+        "endRow": 16,
+        "endCol": 14,
+        "value": "🛗\n엘리베이터"
+      },
+      {
+        "startRow": 5,
+        "startCol": 15,
+        "endRow": 6,
+        "endCol": 23,
+        "value": "복도"
+      },
+      {
+        "startRow": 7,
+        "startCol": 12,
+        "endRow": 14,
+        "endCol": 13,
+        "value": "🏝️\n오아시스"
+      }
+    ],
+    "grid": [
+      [
+        {
+          "r": 0,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 0,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 1,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 14,
+          "value": "🪜\n계단",
+          "type": "facility"
+        },
+        {
+          "r": 1,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 1,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 2,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 2,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 3,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 12,
+          "value": "🚻\n화장실",
+          "type": "facility"
+        },
+        {
+          "r": 3,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 14,
+          "value": "복도",
+          "type": "corridor"
+        },
+        {
+          "r": 3,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 19,
+          "value": "집현전",
+          "type": "facility"
+        },
+        {
+          "r": 3,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 3,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 4,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 4,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 5,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 1,
+          "value": "🚷 비상구\n(사용불가)",
+          "type": "restricted"
+        },
+        {
+          "r": 5,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 5,
+          "value": "복도",
+          "type": "corridor"
+        },
+        {
+          "r": 5,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 15,
+          "value": "복도",
+          "type": "corridor"
+        },
+        {
+          "r": 5,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 5,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 6,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 1,
+          "value": "",
+          "type": "restricted"
+        },
+        {
+          "r": 6,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 6,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 7,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 2,
+          "value": "c6r10s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 3,
+          "value": "c6r9s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 4,
+          "value": "c6r8s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 5,
+          "value": "c6r7s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 6,
+          "value": "c6r6s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 7,
+          "value": "c6r5s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 8,
+          "value": "c6r4s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 9,
+          "value": "c6r3s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 10,
+          "value": "c6r2s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 11,
+          "value": "c6r1s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 12,
+          "value": "🏝️\n오아시스",
+          "type": "facility"
+        },
+        {
+          "r": 7,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 7,
+          "c": 15,
+          "value": "c5r1s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 16,
+          "value": "c5r2s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 17,
+          "value": "c5r3s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 18,
+          "value": "c5r4s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 19,
+          "value": "c5r5s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 20,
+          "value": "c5r6s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 21,
+          "value": "c5r7s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 22,
+          "value": "c5r8s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 23,
+          "value": "c5r9s1",
+          "type": "seat"
+        },
+        {
+          "r": 7,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 8,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 2,
+          "value": "c6r10s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 3,
+          "value": "c6r9s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 4,
+          "value": "c6r8s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 5,
+          "value": "c6r7s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 6,
+          "value": "c6r6s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 7,
+          "value": "c6r5s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 8,
+          "value": "c6r4s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 9,
+          "value": "c6r3s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 10,
+          "value": "c6r2s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 11,
+          "value": "c6r1s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 8,
+          "c": 15,
+          "value": "c5r1s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 16,
+          "value": "c5r2s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 17,
+          "value": "c5r3s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 18,
+          "value": "c5r4s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 19,
+          "value": "c5r5s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 20,
+          "value": "c5r6s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 21,
+          "value": "c5r7s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 22,
+          "value": "c5r8s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 23,
+          "value": "c5r9s2",
+          "type": "seat"
+        },
+        {
+          "r": 8,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 9,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 2,
+          "value": "c6r10s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 3,
+          "value": "c6r9s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 4,
+          "value": "c6r8s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 5,
+          "value": "c6r7s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 6,
+          "value": "c6r6s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 7,
+          "value": "c6r5s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 8,
+          "value": "c6r4s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 9,
+          "value": "c6r3s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 10,
+          "value": "c6r2s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 11,
+          "value": "c6r1s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 9,
+          "c": 15,
+          "value": "c5r1s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 16,
+          "value": "c5r2s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 17,
+          "value": "c5r3s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 18,
+          "value": "c5r4s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 19,
+          "value": "c5r5s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 20,
+          "value": "c5r6s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 21,
+          "value": "c5r7s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 22,
+          "value": "c5r8s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 23,
+          "value": "c5r9s3",
+          "type": "seat"
+        },
+        {
+          "r": 9,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 10,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 2,
+          "value": "c6r10s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 3,
+          "value": "c6r9s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 4,
+          "value": "c6r8s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 5,
+          "value": "c6r7s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 6,
+          "value": "c6r6s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 7,
+          "value": "c6r5s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 8,
+          "value": "c6r4s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 9,
+          "value": "c6r3s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 10,
+          "value": "c6r2s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 11,
+          "value": "c6r1s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 10,
+          "c": 15,
+          "value": "c5r1s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 16,
+          "value": "c5r2s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 17,
+          "value": "c5r3s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 18,
+          "value": "c5r4s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 19,
+          "value": "c5r5s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 20,
+          "value": "c5r6s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 21,
+          "value": "c5r7s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 22,
+          "value": "c5r8s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 23,
+          "value": "c5r9s4",
+          "type": "seat"
+        },
+        {
+          "r": 10,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 11,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 2,
+          "value": "c6r10s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 3,
+          "value": "c6r9s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 4,
+          "value": "c6r8s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 5,
+          "value": "c6r7s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 6,
+          "value": "c6r6s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 7,
+          "value": "c6r5s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 8,
+          "value": "c6r4s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 9,
+          "value": "c6r3s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 10,
+          "value": "c6r2s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 11,
+          "value": "c6r1s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 11,
+          "c": 15,
+          "value": "c5r1s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 16,
+          "value": "c5r2s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 17,
+          "value": "c5r3s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 18,
+          "value": "c5r4s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 19,
+          "value": "c5r5s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 20,
+          "value": "c5r6s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 21,
+          "value": "c5r7s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 22,
+          "value": "c5r8s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 23,
+          "value": "c5r9s5",
+          "type": "seat"
+        },
+        {
+          "r": 11,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 12,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 2,
+          "value": "c6r10s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 3,
+          "value": "c6r9s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 4,
+          "value": "c6r8s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 5,
+          "value": "c6r7s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 6,
+          "value": "c6r6s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 7,
+          "value": "c6r5s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 8,
+          "value": "c6r4s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 9,
+          "value": "c6r3s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 10,
+          "value": "c6r2s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 11,
+          "value": "c6r1s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 12,
+          "c": 15,
+          "value": "c5r1s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 16,
+          "value": "c5r2s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 17,
+          "value": "c5r3s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 18,
+          "value": "c5r4s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 19,
+          "value": "c5r5s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 20,
+          "value": "c5r6s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 21,
+          "value": "c5r7s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 22,
+          "value": "c5r8s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 23,
+          "value": "c5r9s6",
+          "type": "seat"
+        },
+        {
+          "r": 12,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 13,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 2,
+          "value": "c6r10s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 3,
+          "value": "c6r9s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 4,
+          "value": "c6r8s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 5,
+          "value": "c6r7s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 6,
+          "value": "c6r6s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 7,
+          "value": "c6r5s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 8,
+          "value": "c6r4s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 9,
+          "value": "c6r3s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 10,
+          "value": "c6r2s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 11,
+          "value": "c6r1s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 13,
+          "c": 15,
+          "value": "c5r1s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 16,
+          "value": "c5r2s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 17,
+          "value": "c5r3s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 18,
+          "value": "c5r4s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 19,
+          "value": "c5r5s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 20,
+          "value": "c5r6s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 21,
+          "value": "c5r7s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 22,
+          "value": "c5r8s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 23,
+          "value": "c5r9s7",
+          "type": "seat"
+        },
+        {
+          "r": 13,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 14,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 2,
+          "value": "c6r10s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 3,
+          "value": "c6r9s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 4,
+          "value": "c6r8s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 5,
+          "value": "c6r7s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 6,
+          "value": "c6r6s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 7,
+          "value": "c6r5s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 8,
+          "value": "c6r4s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 9,
+          "value": "c6r3s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 10,
+          "value": "c6r2s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 11,
+          "value": "c6r1s8",
+          "type": "seat"
+        },
+        {
+          "r": 14,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 14,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 15,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 14,
+          "value": "🛗\n엘리베이터",
+          "type": "facility"
+        },
+        {
+          "r": 15,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 15,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 16,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 16,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 17,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 17,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ],
+      [
+        {
+          "r": 18,
+          "c": 0,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 1,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 2,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 3,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 4,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 5,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 6,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 7,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 8,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 9,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 10,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 11,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 12,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 13,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 14,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 15,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 16,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 17,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 18,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 19,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 20,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 21,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 22,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 23,
+          "value": "",
+          "type": "empty"
+        },
+        {
+          "r": 18,
+          "c": 24,
+          "value": "",
+          "type": "empty"
+        }
+      ]
+    ]
+  }
+}
