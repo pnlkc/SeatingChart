@@ -373,53 +373,48 @@
 }
 
 /* 매칭된 하이라이팅 셀 (맥박 애니메이션 + 그라데이션 입체화) */
+/* 매칭된 하이라이팅 셀 (정적 강조 유지 + 등장 시 슥 확대) */
 .grid-cell.highlighted {
   z-index: 15;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
   outline: 2px solid #a78bfa !important;
   outline-offset: -2px;
   color: #ffffff !important;
-  transform: scale(1.04);
-  animation: pulseHighlight 2s infinite ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.75), 0 0 10px rgba(99, 102, 241, 0.3) !important;
+  animation: highlightAppear 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* 밝은 모드일 때 매칭된 하이라이팅 셀 (대비 강화 + 그라데이션 입체화) */
+/* 밝은 모드일 때 매칭된 하이라이팅 셀 (대비 강화) */
 .light-theme .grid-cell.highlighted {
   background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%) !important;
   outline: 2px solid #6366f1 !important;
   outline-offset: -2px;
   color: #ffffff !important;
-  transform: scale(1.04);
-  animation: pulseHighlightLight 2s infinite ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.75), 0 0 10px rgba(99, 102, 241, 0.3) !important;
+  animation: highlightAppearLight 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes pulseHighlight {
-  0% {
-    transform: scale(1.03);
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
+@keyframes highlightAppear {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(139, 92, 246, 0) !important;
   }
-  50% {
-    transform: scale(1.06);
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.8), 0 0 10px rgba(99, 102, 241, 0.4);
-  }
-  100% {
-    transform: scale(1.03);
-    box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
+  to {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.75), 0 0 10px rgba(99, 102, 241, 0.3) !important;
   }
 }
 
-@keyframes pulseHighlightLight {
-  0% {
-    transform: scale(1.03);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+@keyframes highlightAppearLight {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0) !important;
   }
-  50% {
-    transform: scale(1.06);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5), 0 0 12px rgba(56, 189, 248, 0.35);
-  }
-  100% {
-    transform: scale(1.03);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+  to {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.75), 0 0 10px rgba(99, 102, 241, 0.3) !important;
   }
 }
 
@@ -606,12 +601,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: calc(var(--radius-tab) - 1px);
   border: none;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
   line-height: 1;
@@ -628,6 +623,68 @@
   background: var(--accent-indigo);
   color: white;
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* 5F 활성화 시 층과 세부 구역을 일체형 캡슐로 감싸는 컨테이너 */
+.floor-tab-group.active {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 4px 3px 14px;
+  border-radius: calc(var(--radius-tab) - 1px);
+  background: var(--accent-indigo);
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.floor-tab-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: white;
+  user-select: none;
+  line-height: 1;
+}
+
+.zone-selector-inline {
+  display: flex;
+  gap: 3px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px;
+  border-radius: 6px;
+  height: 26px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.zone-selector-inline .zone-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 12px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+}
+
+.zone-selector-inline .zone-tab:hover:not(.active) {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.zone-selector-inline .zone-tab.active {
+  background: white;
+  color: var(--accent-indigo);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* 그리드 셀 내의 아이콘 & 텍스트 정렬 */
@@ -702,62 +759,26 @@
   z-index: 5;
 }
 
-/* 층선택 & 구역선택 레이아웃 래퍼 */
+/* 층선택 & 구역선택 레이아웃 래퍼 — 한 줄 정렬 */
 .floor-selector-container {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   z-index: 10;
 }
 
-/* 기존 floor-selector의 위치 지정을 Container로 이관함에 따라 override */
+/* 기존 floor-selector의 위치 지정을 Container로 이관함에 따라 override — 1단 콘트롤 */
 .floor-selector {
   position: static !important;
   transform: none !important;
 }
 
-/* 5F 구역 서브 세그먼트 셀렉터 */
-.zone-selector {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 4px;
-  border-radius: var(--radius-tab);
-  border: 1px solid var(--border-glass);
-}
 
-.zone-tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 14px;
-  border-radius: calc(var(--radius-tab) - 1px);
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  line-height: 1;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: inherit;
-}
-
-.zone-tab:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.zone-tab.active {
-  background: var(--accent-purple);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-}
 
 /* 비활성화 구역에 대한 흐림(Dimmed) 효과 */
 .grid-cell.dimmed,
@@ -963,28 +984,121 @@
   box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
 }
 
+/* PC 전용 요소 (모바일에서 숨김) */
+.header-top-row { display: none; }
+.header-mobile-actions { display: none; }
+.mobile-search-toggle { display: none; }
+
+/* 검색+테마 래퍼 — PC 기본 */
+.search-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 모바일 전용 요소 (PC에서 숨김) */
+.pc-only { display: block; }
+
 /* ======================================================
    모바일 반응형 (≤768px)
    PC 스타일은 일체 변경하지 않으며 이 블록만 덮어씁니다.
    ====================================================== */
 @media (max-width: 768px) {
 
-  /* 앱 컨테이너 — 세로 스크롤 허용 */
+  /* 앱 컨테이너 — 100dvh 고정, 내부 진반 설정 */
   .app-container {
-    height: auto;
-    min-height: 100dvh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 8px 10px;
-    gap: 8px;
+    height: 100dvh;
+    min-height: unset;
+    overflow: hidden;
+    padding: 4px 6px;
+    gap: 4px;
   }
 
-  /* 헤더 — 세로 스택 레이아웃으로 전환 */
+  /* 헤더 — 1행 compact (타이틀 + 우측 버튼) */
+  .app-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
+  /* 모바일 타이틀 행 — 전체 너비 flex */
+  .header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* PC 전용 h1 — 모바일에서 숨김 */
+  .header-info.pc-only {
+    display: none;
+  }
+  .pc-only {
+    display: none !important;
+  }
+
+  /* 모바일 우측 버튼 그룹 */
+  .header-mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  /* 모바일 검색 토글 버튼 */
+  .mobile-search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-search-toggle.active {
+    background: var(--accent-indigo);
+    border-color: var(--accent-indigo);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  /* 검색 영역 — 모바일 기본: 숨김, .mobile-open 시 노출 */
+  .search-area {
+    display: none;
+    width: 100%;
+  }
+
+  .search-area.mobile-open {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    animation: searchSlideDown 0.22s ease-out;
+  }
+
+  @keyframes searchSlideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 헤더 재배치 — 모바일에서는 column 으로 */
   .app-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-    padding: 10px 12px;
+    flex-shrink: 0;
+    gap: 6px;
+    padding: 6px 10px;
   }
 
   /* h1 — 중앙 정렬 & 폰트 축소 */
@@ -993,17 +1107,19 @@
     text-align: center;
   }
 
-  /* floor-selector-container — absolute 해제 → 일반 흐름 */
+  /* floor-selector-container — absolute 해제 → 한 줄 유지 (높이 증가 방지) */
   .floor-selector-container {
     position: static;
     transform: none;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
   }
+
+
 
   /* 검색박스 래퍼 — 100% 너비 */
   .app-header > div:last-child {
@@ -1021,43 +1137,78 @@
     flex-shrink: 0;
   }
 
-  /* 범례 패널 — 2열 자동 줄바꿈 */
+  /* 범례 패널 — 콤팁하게 */
   .legend-panel {
-    gap: 8px 14px;
-    padding: 6px 10px;
+    flex-shrink: 0;
+    gap: 6px 12px;
+    padding: 4px 8px;
   }
 
   .legend-item {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
-  /* 배치도 뷰포트 — 세로 고정 해제, 가로 스크롤 */
+  /* 배치도 뷰포트 — 렬더링 영역 남은 공간 완전 점유 */
   .map-viewport {
-    flex: none;
+    flex: 1;
+    min-height: 0;
     height: auto;
-    min-height: 55dvh;
-    max-height: 65dvh;
     overflow-x: auto;
     overflow-y: auto;
-    border-radius: 12px;
-    padding: 4px;
+    border-radius: 8px;
+    padding: 0;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* 좌석 그리드 — 터치 스크롤 가능한 최소 너비 */
+  /* 좌석 그리드 — 3F 17열 기준 충분한 너비, 내부 여백 제거 */
   .seating-grid {
-    min-width: 680px;
-    height: auto;
-    min-height: 100%;
+    min-width: 900px;
+    height: 100%;
+    padding: 0;
   }
 
-  /* 그리드 셀 — 터치 타겟 최소 크기 확보 */
+  /* 그리드 셀 — 최소 높이 + z-index로 L-shape 위에 표시 */
   .grid-cell {
-    font-size: 10px;
+    font-size: 11px;
+    overflow: hidden;
+    min-height: 32px;
+    z-index: 3;
   }
 
+  /* 비상구·병합 셀 — auto 행에서 최소 높이 보장 */
+  .grid-cell.exit-cell,
+  .grid-cell.facility,
+  .grid-cell.restricted {
+    min-height: 60px;
+  }
+
+  /* 셀 텍스트 — 한 줄 고정, 넘치면 말줄임 */
   .cell-text {
-    font-size: 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  /* 가로 병합 좁은 좌석(회의실 배치)은 2줄 표시 유지 */
+  .grid-cell.seat.narrow-seat .cell-text {
+    white-space: pre-line;
+    font-size: 9px;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  /* 비상구·편의시설 병합 셀 — 다줄 + 개행 허용 */
+  .grid-cell.exit-cell .cell-text,
+  .grid-cell.facility .cell-text,
+  .grid-cell.restricted .cell-text,
+  .grid-cell.corridor .cell-text {
+    white-space: pre-line;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: clip;
+    line-height: 1.3;
   }
 
   /* 모달 — 화면 너비에 맞게 */
@@ -1085,16 +1236,20 @@
 
   /* 토스트 — 다줄 허용 & 화면 너비 맞춤 */
   .toast-message {
-    max-width: calc(100vw - 24px);
-    padding: 10px 16px;
-    border-radius: 14px;
-    font-size: 0.78rem;
-    top: 14px;
+    width: calc(100vw - 32px); /* 좌우 여백 16px만 남기고 가로 전체 넉넉히 활용 */
+    max-width: 500px;
+    padding: 12px 20px;
+    border-radius: 50px; /* PC와 동일하게 유려한 라운드 캡슐 형태 유지 */
+    font-size: 0.84rem; /* 시인성 확보를 위해 글자 크기 상향 */
+    top: 16px;
+    justify-content: center; /* 내부 텍스트 중앙 정렬 */
+    box-sizing: border-box;
   }
 
   .toast-text {
     white-space: normal;
-    line-height: 1.5;
+    line-height: 1.4;
+    text-align: center;
   }
 
   @keyframes toastSlideDown {
