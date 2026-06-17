@@ -113,9 +113,13 @@ export default function App() {
     zoomRef.current = zoom;
   }, [zoom]);
 
-  // 층/구역 전환 시 줌 100% 초기화
+  // 뷰 방향 상태 정의: 'elevator' (엘리베이터 기준 - 기본값), 'stairs' (계단 기준)
+  const [viewDirection, setViewDirection] = useState('elevator');
+
+  // 층/구역 전환 시 줌 100% 및 뷰 방향 초기화
   useEffect(() => {
     setZoom(1);
+    setViewDirection('elevator');
   }, [activeFloor, activeZone]);
 
   // 모바일 브라우저 자체 줌(핀치 줌, 더블 탭 줌) 방지
@@ -914,6 +918,18 @@ export default function App() {
         {/* 모바일 전용 우측 액션 버튼 */}
         <div className="header-mobile-actions">
           <button
+            className={`view-direction-btn ${viewDirection === 'stairs' ? 'rotated-active' : ''}`}
+            onClick={() => setViewDirection((prev) => prev === 'elevator' ? 'stairs' : 'elevator')}
+            title={viewDirection === 'elevator' ? "계단 기준 뷰로 전환" : "엘리베이터 기준 뷰로 전환"}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="view-direction-icon">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+              <path d="M16 16h5v5" />
+            </svg>
+          </button>
+          <button
             className="theme-toggle-btn"
             onClick={() => setIsLightTheme(!isLightTheme)}
             title={isLightTheme ? "다크모드로 전환" : "라이트모드로 전환"}
@@ -955,6 +971,18 @@ export default function App() {
               </button>
             )}
           </div>
+          <button
+            className={`view-direction-btn pc-only ${viewDirection === 'stairs' ? 'rotated-active' : ''}`}
+            onClick={() => setViewDirection((prev) => prev === 'elevator' ? 'stairs' : 'elevator')}
+            title={viewDirection === 'elevator' ? "계단 기준 뷰로 전환" : "엘리베이터 기준 뷰로 전환"}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="view-direction-icon">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+              <path d="M16 16h5v5" />
+            </svg>
+          </button>
           <button
             className="theme-toggle-btn pc-only"
             onClick={() => setIsLightTheme(!isLightTheme)}
@@ -1002,7 +1030,16 @@ export default function App() {
             }}
           >
             <div
-              className="seating-grid"
+              className="seating-grid-rotation-wrapper"
+              style={{
+                transform: viewDirection === 'stairs' ? 'rotate(180deg)' : 'none',
+                transformOrigin: 'center center',
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <div
+                className="seating-grid"
               style={{
                 transform: isMobile ? `scale(${zoom})` : 'none',
                 transformOrigin: 'top left',
@@ -1393,6 +1430,7 @@ export default function App() {
               );
             })
           )}
+            </div>
           </div>
         </div>
       </div>

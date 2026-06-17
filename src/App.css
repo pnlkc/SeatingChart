@@ -1273,5 +1273,80 @@
   will-change: transform;
 }
 
+/* 뷰 방향 전환 래퍼 및 회전 애니메이션 (GPU 3D 가속 적용) */
+.seating-grid-rotation-wrapper {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 180도 회전 시 내부 콘텐츠(글자, 아이콘 등) 역보정 (개별 애니메이션 제거로 병목 최적화) */
+.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell .cell-icon-wrapper,
+.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell .cell-text,
+.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .restricted-l-content {
+  transform: rotate(180deg);
+}
+
+/* 180도 회전 시 글자 아래에 아이콘이 가려지거나 뒤집히는 레이아웃 정렬 보정 */
+.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell {
+  flex-direction: column-reverse !important;
+}
+
+.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .restricted-l-content > div {
+  flex-direction: column-reverse !important;
+}
+
+/* 뷰 전환 버튼 스타일 */
+.view-direction-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.view-direction-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-glass-focus);
+  transform: scale(1.08) rotate(15deg);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+}
+
+/* 뷰 전환 활성화(계단 뷰) 시 버튼 자체 180도 회전 및 액티브 칼라 입체화 */
+.view-direction-btn.rotated-active {
+  transform: rotate(180deg) !important;
+  color: #fb923c !important;
+  border-color: rgba(251, 146, 60, 0.4) !important;
+  background: rgba(251, 146, 60, 0.08) !important;
+  box-shadow: 0 0 15px rgba(251, 146, 60, 0.2) !important;
+}
+
+.view-direction-btn.rotated-active:hover {
+  transform: scale(1.08) rotate(195deg) !important;
+}
+
+/* 라이트 테마 대응 */
+.light-theme .view-direction-btn {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.light-theme .view-direction-btn.rotated-active {
+  color: #c2410c !important;
+  border-color: rgba(194, 65, 12, 0.4) !important;
+  background: rgba(194, 65, 12, 0.06) !important;
+}
+
+
+
 
 
