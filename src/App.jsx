@@ -104,6 +104,98 @@ export default function App() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
+  // 모바일 줌 상태 정의 (60% ~ 200%)
+  const [zoom, setZoom] = useState(1);
+  const zoomRef = useRef(zoom);
+
+  useEffect(() => {
+    zoomRef.current = zoom;
+  }, [zoom]);
+
+  // 층/구역 전환 시 줌 100% 초기화
+  useEffect(() => {
+    setZoom(1);
+  }, [activeFloor, activeZone]);
+
+  // 모바일 브라우저 자체 줌(핀치 줌, 더블 탭 줌) 방지
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const preventDefaultZoom = (e) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    let lastTouchEnd = 0;
+    const preventDoubleTapZoom = (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    };
+
+    document.addEventListener('touchstart', preventDefaultZoom, { passive: false });
+    document.addEventListener('touchmove', preventDefaultZoom, { passive: false });
+    document.addEventListener('touchend', preventDoubleTapZoom, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', preventDefaultZoom);
+      document.removeEventListener('touchmove', preventDefaultZoom);
+      document.removeEventListener('touchend', preventDoubleTapZoom);
+    };
+  }, [isMobile]);
+
+  // 배치도 내부 영역(mapViewport)에서의 핀치 줌 제어
+  useEffect(() => {
+    const viewport = mapViewportRef.current;
+    if (!viewport || !isMobile) return;
+
+    let startDist = 0;
+    let startZoom = 1;
+
+    const handleTouchStart = (e) => {
+      if (e.touches.length === 2) {
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        startDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        startZoom = zoomRef.current;
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches.length === 2 && startDist > 0) {
+        e.preventDefault(); // 기본 줌/스크롤 완전 차단
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        const scale = dist / startDist;
+
+        let newZoom = startZoom * scale;
+        // 최소 60%, 최대 200% 범위 제한
+        newZoom = Math.min(Math.max(newZoom, 0.6), 2.0);
+        newZoom = Math.round(newZoom * 100) / 100;
+
+        setZoom(newZoom);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      startDist = 0;
+    };
+
+    viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
+    viewport.addEventListener('touchmove', handleTouchMove, { passive: false });
+    viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      viewport.removeEventListener('touchstart', handleTouchStart);
+      viewport.removeEventListener('touchmove', handleTouchMove);
+      viewport.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile]);
+
   // 모바일 좌우 스크롤 상태 감지
   const [scrollIndicators, setScrollIndicators] = useState({
     left: false,
@@ -841,20 +933,31 @@ export default function App() {
           onScroll={handleViewportScroll}
         >
           <div
-            className="seating-grid"
+            className="seating-grid-zoom-container"
             style={{
-            gridTemplateRows: isMobile
-              ? `repeat(${currentFloorConfig?.dimensions?.rows || 1}, auto)`
-              : `repeat(${currentFloorConfig?.dimensions?.rows || 1}, 1fr)`,
-            gridTemplateColumns: currentFloorConfig?.dimensions?.cols === 17
-              ? 'repeat(10, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(68px, 0.6fr) minmax(68px, 0.6fr)'
-              : currentFloorConfig?.dimensions?.cols === 25
-              ? (activeZone === 'C5'
-                ? 'minmax(90px, 1.2fr) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) repeat(10, minmax(50px, 1fr))'
-                : 'minmax(50px, 1fr) repeat(10, minmax(50px, 1fr)) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(90px, 1.2fr) minmax(50px, 1fr)')
-              : `repeat(${currentFloorConfig?.dimensions?.cols || 1}, minmax(50px, 1fr))`
-          }}
-        >
+              width: isMobile ? `calc(100% * ${zoom})` : '100%',
+              height: isMobile ? `calc(100% * ${zoom})` : '100%',
+            }}
+          >
+            <div
+              className="seating-grid"
+              style={{
+                transform: isMobile ? `scale(${zoom})` : 'none',
+                transformOrigin: 'top left',
+                width: isMobile ? `calc(100% / ${zoom})` : '100%',
+                height: isMobile ? `calc(100% / ${zoom})` : '100%',
+                gridTemplateRows: isMobile
+                  ? `repeat(${currentFloorConfig?.dimensions?.rows || 1}, auto)`
+                  : `repeat(${currentFloorConfig?.dimensions?.rows || 1}, 1fr)`,
+                gridTemplateColumns: currentFloorConfig?.dimensions?.cols === 17
+                  ? 'repeat(10, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(68px, 0.6fr) minmax(68px, 0.6fr)'
+                  : currentFloorConfig?.dimensions?.cols === 25
+                  ? (activeZone === 'C5'
+                    ? 'minmax(90px, 1.2fr) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) repeat(10, minmax(50px, 1fr))'
+                    : 'minmax(50px, 1fr) repeat(10, minmax(50px, 1fr)) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(90px, 1.2fr) minmax(50px, 1fr)')
+                  : `repeat(${currentFloorConfig?.dimensions?.cols || 1}, minmax(50px, 1fr))`
+              }}
+            >
           {/* CLUSTER 컴퓨터 좌석 및 회의 공간 통합 구역 패널 배경 */}
           {activeFloor === '3F' && (
             <div
@@ -1228,8 +1331,38 @@ export default function App() {
               );
             })
           )}
+          </div>
         </div>
       </div>
+
+      {/* 모바일 전용 플로팅 보조 줌 컨트롤러 */}
+      {isMobile && (
+        <div className="zoom-controls">
+          <button
+            className="zoom-btn"
+            onClick={() => setZoom((prev) => Math.max(prev - 0.2, 0.6))}
+            disabled={zoom <= 0.6}
+            title="축소"
+          >
+            ➖
+          </button>
+          <button
+            className="zoom-reset-btn"
+            onClick={() => setZoom(1)}
+            title="기본 배율 초기화"
+          >
+            {Math.round(zoom * 100)}%
+          </button>
+          <button
+            className="zoom-btn"
+            onClick={() => setZoom((prev) => Math.min(prev + 0.2, 2.0))}
+            disabled={zoom >= 2.0}
+            title="확대"
+          >
+            ➕
+          </button>
+        </div>
+      )}
 
       {/* 모바일 좌우 스크롤 가능 여부 가이드 화살표 */}
       {isMobile && (

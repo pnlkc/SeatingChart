@@ -1211,52 +1211,137 @@
 }
 
 /* 스크롤 화살표 인디케이터 공통 (프리미엄 인디고 그라데이션 적용하여 시인성 대폭 강화) */
+/* 스크롤 화살표 인디케이터 공통 (크기 축소 및 부드러운 애니메이션 튜닝) */
 .scroll-indicator {
   position: absolute;
   z-index: 100;
   background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-purple) 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.35);
   color: #ffffff !important;
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: none; /* 클릭 방해 금지 */
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35), 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+.scroll-indicator svg {
+  width: 15px !important;
+  height: 15px !important;
 }
 
 /* 라이트 테마 대응 */
 .light-theme .scroll-indicator {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4), 0 0 12px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25), 0 0 8px rgba(124, 58, 237, 0.15);
   color: #ffffff !important;
 }
 
 .indicator-left {
-  left: 10px;
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
-  animation: pulseIndicatorLeft 1.8s infinite ease-in-out;
+  animation: pulseIndicatorLeft 2.4s infinite ease-in-out;
 }
 .indicator-right {
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  animation: pulseIndicatorRight 1.8s infinite ease-in-out;
+  animation: pulseIndicatorRight 2.4s infinite ease-in-out;
 }
 
 
-/* 방향별 펄스 스케일 초기화 보완 */
+/* 방향별 펄스 스케일 초기화 보완 (진폭을 줄이고 주기를 늦춤) */
 @keyframes pulseIndicatorLeft {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
-  50% { transform: translateY(-50%) translateX(-4px) scale(1.08); opacity: 1; }
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.75; }
+  50% { transform: translateY(-50%) translateX(-2.5px) scale(1.03); opacity: 0.95; }
 }
 @keyframes pulseIndicatorRight {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
-  50% { transform: translateY(-50%) translateX(4px) scale(1.08); opacity: 1; }
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.75; }
+  50% { transform: translateY(-50%) translateX(2.5px) scale(1.03); opacity: 0.95; }
+}
+
+/* 줌 컨테이너 및 플로팅 컨트롤러 */
+.seating-grid-zoom-container {
+  display: block;
+  transform-origin: top left;
+  transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.zoom-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.light-theme .zoom-controls {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: var(--text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.light-theme .zoom-btn {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.light-theme .zoom-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.zoom-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.zoom-reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0 8px;
+  cursor: pointer;
+  min-width: 44px;
+  text-align: center;
+  user-select: none;
+  font-family: inherit;
 }
 
 
