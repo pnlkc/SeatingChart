@@ -1331,15 +1331,9 @@
 }
 
 .zoom-reset-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  font-size: 0.78rem;
+  font-size: 0.7rem !important;
   font-weight: 700;
-  padding: 0 8px;
   cursor: pointer;
-  min-width: 44px;
-  text-align: center;
   user-select: none;
   font-family: inherit;
 }

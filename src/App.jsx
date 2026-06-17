@@ -107,6 +107,7 @@ export default function App() {
   // 모바일 줌 상태 정의 (60% ~ 200%)
   const [zoom, setZoom] = useState(1);
   const zoomRef = useRef(zoom);
+  const touchCenterRef = useRef({ relativeX: 0, relativeY: 0, contentX: 0, contentY: 0 });
 
   useEffect(() => {
     zoomRef.current = zoom;
@@ -147,7 +148,7 @@ export default function App() {
     };
   }, [isMobile]);
 
-  // 배치도 내부 영역(mapViewport)에서의 핀치 줌 제어
+  // 배치도 내부 영역(mapViewport)에서의 핀치 줌 제어 (터치 중앙 기준점 추적 및 스크롤 자동 보정 적용)
   useEffect(() => {
     const viewport = mapViewportRef.current;
     if (!viewport || !isMobile) return;
@@ -161,12 +162,27 @@ export default function App() {
         const t2 = e.touches[1];
         startDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
         startZoom = zoomRef.current;
+
+        // 두 터치 지점의 중간값(중앙좌표) 계산
+        const rect = viewport.getBoundingClientRect();
+        const centerX = (t1.clientX + t2.clientX) / 2;
+        const centerY = (t1.clientY + t2.clientY) / 2;
+
+        // 뷰포트 상대적 오프셋 계산
+        const relativeX = centerX - rect.left;
+        const relativeY = centerY - rect.top;
+
+        // 줌 배율이 1일 때 기준의 절대 콘텐츠 내 상대좌표(Pivot) 계산 보관
+        const contentX = (viewport.scrollLeft + relativeX) / startZoom;
+        const contentY = (viewport.scrollTop + relativeY) / startZoom;
+
+        touchCenterRef.current = { relativeX, relativeY, contentX, contentY };
       }
     };
 
     const handleTouchMove = (e) => {
       if (e.touches.length === 2 && startDist > 0) {
-        e.preventDefault(); // 기본 줌/스크롤 완전 차단
+        e.preventDefault(); // 기본 브라우저 줌/스크롤 제어 차단
         const t1 = e.touches[0];
         const t2 = e.touches[1];
         const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
@@ -177,7 +193,17 @@ export default function App() {
         newZoom = Math.min(Math.max(newZoom, 0.6), 2.0);
         newZoom = Math.round(newZoom * 100) / 100;
 
-        setZoom(newZoom);
+        if (newZoom !== zoomRef.current) {
+          setZoom(newZoom);
+
+          // 핀치 줌 중앙 좌표(Anchor)가 뷰포트 화면상 제자리에 계속 머물도록 스크롤 오프셋 정밀 보정
+          const { relativeX, relativeY, contentX, contentY } = touchCenterRef.current;
+          const targetScrollLeft = contentX * newZoom - relativeX;
+          const targetScrollTop = contentY * newZoom - relativeY;
+
+          viewport.scrollLeft = targetScrollLeft;
+          viewport.scrollTop = targetScrollTop;
+        }
       }
     };
 
@@ -1347,11 +1373,11 @@ export default function App() {
             ➖
           </button>
           <button
-            className="zoom-reset-btn"
+            className="zoom-btn zoom-reset-btn"
             onClick={() => setZoom(1)}
             title="기본 배율 초기화"
           >
-            {Math.round(zoom * 100)}%
+            🔄
           </button>
           <button
             className="zoom-btn"
