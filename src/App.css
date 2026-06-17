@@ -173,6 +173,10 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .seating-grid {
@@ -1273,29 +1277,35 @@
   will-change: transform;
 }
 
-/* 뷰 방향 전환 래퍼 및 회전 애니메이션 (GPU 3D 가속 적용) */
+/* 뷰 방향 전환 래퍼 및 회전 애니메이션 (부모 뷰포트가 직접 회전하므로 래퍼 자체 트랜지션은 비활성화) */
 .seating-grid-rotation-wrapper {
   display: block;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-  backface-visibility: hidden;
-  perspective: 1000px;
+  width: 100%;
+  height: 100%;
 }
 
 /* 180도 회전 시 내부 콘텐츠(글자, 아이콘 등) 역보정 (개별 애니메이션 제거로 병목 최적화) */
-.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell .cell-icon-wrapper,
-.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell .cell-text,
-.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .restricted-l-content {
+.map-viewport[style*="rotate(180deg)"] .grid-cell .cell-icon-wrapper,
+.map-viewport[style*="rotate(180deg)"] .grid-cell .cell-text {
   transform: rotate(180deg);
 }
 
+/* 3층 L자 제한구역의 절대 중앙정렬 offset을 유지하며 역회전 보정 */
+.map-viewport[style*="rotate(180deg)"] .restricted-l-content {
+  transform: translate(-50%, -50%) rotate(180deg) !important;
+}
+
 /* 180도 회전 시 글자 아래에 아이콘이 가려지거나 뒤집히는 레이아웃 정렬 보정 */
-.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .grid-cell {
+.map-viewport[style*="rotate(180deg)"] .grid-cell {
   flex-direction: column-reverse !important;
 }
 
-.seating-grid-rotation-wrapper[style*="rotate(180deg)"] .restricted-l-content > div {
-  flex-direction: column-reverse !important;
+/* 180도 회전 시 3층 L자 제한구역의 텍스트가 경계 밖으로 깨지지 않고 넓은 구역에 안착되도록 오프셋 변경 - 부모가 회전하면서 로컬 top: 30%가 물리적으로 하단에 자동 위치하므로 보정 제거 */
+
+/* 180도 회전 시 5층 뭉침 구역 블록의 역회전 및 텍스트 상하 순서 보정 - 블록 전체를 역회전시켰으므로 내부 순서는 정방향과 동일하게 column 유지 */
+.map-viewport[style*="rotate(180deg)"] .collapsed-zone-block {
+  transform: rotate(180deg);
+  flex-direction: column !important;
 }
 
 /* 뷰 전환 버튼 스타일 */

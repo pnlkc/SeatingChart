@@ -116,10 +116,9 @@ export default function App() {
   // 뷰 방향 상태 정의: 'elevator' (엘리베이터 기준 - 기본값), 'stairs' (계단 기준)
   const [viewDirection, setViewDirection] = useState('elevator');
 
-  // 층/구역 전환 시 줌 100% 및 뷰 방향 초기화
+  // 층/구역 전환 시 줌 100% 초기화 (뷰 방향 상태는 그대로 유지)
   useEffect(() => {
     setZoom(1);
-    setViewDirection('elevator');
   }, [activeFloor, activeZone]);
 
   // 모바일 브라우저 자체 줌(핀치 줌, 더블 탭 줌) 방지
@@ -1021,6 +1020,10 @@ export default function App() {
           className="map-viewport"
           ref={mapViewportRef}
           onScroll={handleViewportScroll}
+          style={{
+            transform: viewDirection === 'stairs' ? 'rotate(180deg)' : 'none',
+            transformOrigin: 'center center',
+          }}
         >
           <div
             className="seating-grid-zoom-container"
@@ -1032,8 +1035,6 @@ export default function App() {
             <div
               className="seating-grid-rotation-wrapper"
               style={{
-                transform: viewDirection === 'stairs' ? 'rotate(180deg)' : 'none',
-                transformOrigin: 'center center',
                 width: '100%',
                 height: '100%',
               }}
@@ -1221,7 +1222,9 @@ export default function App() {
                     >
                       <div className="collapsed-title">C6</div>
                       <div className="collapsed-subtitle">구역</div>
-                      <div className="collapsed-hint">◀ 펼치기</div>
+                      <div className="collapsed-hint">
+                        {viewDirection === 'stairs' ? '펼치기 ▶' : '◀ 펼치기'}
+                      </div>
                     </div>
                   );
                 }
@@ -1315,7 +1318,9 @@ export default function App() {
                     >
                       <div className="collapsed-title">C5</div>
                       <div className="collapsed-subtitle">구역</div>
-                      <div className="collapsed-hint">펼치기 ▶</div>
+                      <div className="collapsed-hint">
+                        {viewDirection === 'stairs' ? '◀ 펼치기' : '펼치기 ▶'}
+                      </div>
                     </div>
                   );
                 }
