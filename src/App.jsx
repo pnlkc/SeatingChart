@@ -104,8 +104,56 @@ export default function App() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // 모바일 검색창 토글 상태
-  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  // 모바일 좌우 스크롤 상태 감지
+  const [scrollIndicators, setScrollIndicators] = useState({
+    left: false,
+    right: false
+  });
+
+  const scrollTickingRef = useRef(false);
+
+  const checkScrollIndicators = () => {
+    const el = mapViewportRef.current;
+    if (!el) return;
+    const canScrollLeft = el.scrollLeft > 1;
+    const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 1;
+
+    // 상태 변화가 실제로 일어났을 때만 리렌더링하도록 bailout 방어 처리
+    setScrollIndicators((prev) => {
+      if (prev.left === canScrollLeft && prev.right === canScrollRight) {
+        return prev;
+      }
+      return {
+        left: canScrollLeft,
+        right: canScrollRight
+      };
+    });
+  };
+
+  // requestAnimationFrame 기반의 스크롤 최적화(Throttling) 적용
+  const handleViewportScroll = () => {
+    if (!scrollTickingRef.current) {
+      window.requestAnimationFrame(() => {
+        checkScrollIndicators();
+        scrollTickingRef.current = false;
+      });
+      scrollTickingRef.current = true;
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkScrollIndicators();
+    }, 400); // 렌더링 완료 타이밍 보장
+    
+    window.addEventListener('resize', checkScrollIndicators);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkScrollIndicators);
+    };
+  }, [activeFloor, activeZone]);
+
+
 
   // 엔터 입력 시 정확히 일치하는 단일 셀만 강조하기 위한 상태 키 (r,c)
   const [exactMatchKey, setExactMatchKey] = useState(null);
@@ -171,6 +219,20 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCell, setSelectedCell] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // ESC 키 클릭 시 모달 닫기
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen]);
 
   // 2. 현재 선택된 층의 데이터셋 단축 바인딩
   const currentFloorConfig = rawSeatingData[activeFloor];
@@ -252,18 +314,14 @@ export default function App() {
     return map;
   }, [searchQuery, currentGrid, mergeMap, exactMatchKey]);
 
-  // 모바일: 검색 성공(toast) 시 하이라이트 셀로 자동 스크롤
+  // 모바일: 검색 성공(toast) 시 하이라이트 셀로 자동 스크롤 (화면 중앙 정렬)
   useEffect(() => {
     if (!isMobile || !toast || !mapViewportRef.current) return;
     const timer = setTimeout(() => {
       const highlighted = mapViewportRef.current?.querySelector('.grid-cell.highlighted');
-      if (!highlighted) return;
-      const viewport = mapViewportRef.current;
-      const cellRect = highlighted.getBoundingClientRect();
-      const vpRect = viewport.getBoundingClientRect();
-      const scrollLeft = viewport.scrollLeft + (cellRect.left - vpRect.left) - vpRect.width / 2 + cellRect.width / 2;
-      const scrollTop  = viewport.scrollTop  + (cellRect.top  - vpRect.top)  - vpRect.height / 2 + cellRect.height / 2;
-      viewport.scrollTo({ left: Math.max(0, scrollLeft), top: Math.max(0, scrollTop), behavior: 'smooth' });
+      if (highlighted) {
+        highlighted.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+      }
     }, 150); // 층/구역 전환 + React 리렌더링 완료 대기
     return () => clearTimeout(timer);
   }, [toast, isMobile]);
@@ -413,17 +471,13 @@ export default function App() {
         }
       }
 
-      // 3. 모바일의 경우 전환 후 하이라이트된 첫 셀로 자동 스크롤 실행
+      // 3. 모바일의 경우 전환 후 하이라이트된 첫 셀로 자동 스크롤 실행 (화면 중앙 정렬)
       if (isMobile && mapViewportRef.current) {
         setTimeout(() => {
           const highlighted = mapViewportRef.current?.querySelector('.grid-cell.highlighted');
-          if (!highlighted) return;
-          const viewport = mapViewportRef.current;
-          const cellRect = highlighted.getBoundingClientRect();
-          const vpRect = viewport.getBoundingClientRect();
-          const scrollLeft = viewport.scrollLeft + (cellRect.left - vpRect.left) - vpRect.width / 2 + cellRect.width / 2;
-          const scrollTop  = viewport.scrollTop  + (cellRect.top  - vpRect.top)  - vpRect.height / 2 + cellRect.height / 2;
-          viewport.scrollTo({ left: Math.max(0, scrollLeft), top: Math.max(0, scrollTop), behavior: 'smooth' });
+          if (highlighted) {
+            highlighted.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+          }
         }, 100);
       }
     }, 300); // 키 입력 멈춤 300ms 후 실행
@@ -651,49 +705,7 @@ export default function App() {
     <div className="app-container">
       {/* 대시보드 헤더 */}
       <header className="app-header">
-        {/* 모바일 전용: 타이틀 + 우측 아이콘 버튼 */}
-        <div className="header-top-row">
-          <div className="header-info">
-            <h1>
-              {activeFloor} 캐빈
-              {activeFloor === '5F' && ` (${activeZone} 구역)`}
-            </h1>
-          </div>
-          {/* 모바일 전용 우측 액션 버튼 */}
-          <div className="header-mobile-actions">
-            <button
-              className="theme-toggle-btn"
-              onClick={() => setIsLightTheme(!isLightTheme)}
-              title={isLightTheme ? "다크모드로 전환" : "라이트모드로 전환"}
-            >
-              {isLightTheme ? '🌙' : '☀️'}
-            </button>
-            <button
-              className={`mobile-search-toggle ${isMobileSearchOpen ? 'active' : ''}`}
-              onClick={() => {
-                if (isMobileSearchOpen) {
-                  setSearchQuery('');
-                  setExactMatchKey(null);
-                  setToast(null);
-                }
-                setIsMobileSearchOpen(!isMobileSearchOpen);
-              }}
-              title="검색"
-            >
-              {isMobileSearchOpen ? '×' : '🔍'}
-            </button>
-          </div>
-        </div>
-
-        {/* PC 전용 헤더정보 (h1) */}
-        <div className="header-info pc-only">
-          <h1>
-            {activeFloor} 캐빈
-            {activeFloor === '5F' && ` (${activeZone} 구역)`}
-          </h1>
-        </div>
-
-        {/* 층 전환 및 구역 선택 탭 컨트롤러 컨테이너 */}
+        {/* 층 전환 및 구역 선택 탭 컨트롤러 컨테이너 (제목 위치 대체) */}
         <div className="floor-selector-container">
           <div className="floor-selector">
             {floors.map((floor) => {
@@ -744,9 +756,20 @@ export default function App() {
             })}
           </div>
         </div>
+
+        {/* 모바일 전용 우측 액션 버튼 */}
+        <div className="header-mobile-actions">
+          <button
+            className="theme-toggle-btn"
+            onClick={() => setIsLightTheme(!isLightTheme)}
+            title={isLightTheme ? "다크모드로 전환" : "라이트모드로 전환"}
+          >
+            {isLightTheme ? '🌙' : '☀️'}
+          </button>
+        </div>
         
-        {/* 실시간 통합 검색 & 테마 토글 (PC: 항상 표시 / 모바일: 아이콘 클릭 시만 노출) */}
-        <div className={`search-area${isMobileSearchOpen ? ' mobile-open' : ''}`}>
+        {/* 실시간 통합 검색 & 테마 토글 (항상 노출) */}
+        <div className="search-area">
           <div className="search-box">
             <span className="search-icon">🔍</span>
             <input
@@ -758,6 +781,7 @@ export default function App() {
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleSearchSubmit();
+                  e.target.blur(); // 모바일 가상 키보드 닫기
                 }
               }}
             />
@@ -809,21 +833,26 @@ export default function App() {
 
 
 
-      {/* 좌석 배치도 본문 */}
-      <main className="map-viewport" ref={mapViewportRef}>
+      {/* 좌석 배치도 본문 래퍼 */}
+      <main className="map-viewport-wrapper">
         <div
-          className="seating-grid"
-          style={{
+          className="map-viewport"
+          ref={mapViewportRef}
+          onScroll={handleViewportScroll}
+        >
+          <div
+            className="seating-grid"
+            style={{
             gridTemplateRows: isMobile
               ? `repeat(${currentFloorConfig?.dimensions?.rows || 1}, auto)`
               : `repeat(${currentFloorConfig?.dimensions?.rows || 1}, 1fr)`,
             gridTemplateColumns: currentFloorConfig?.dimensions?.cols === 17
-              ? 'repeat(10, minmax(42px, 1fr)) minmax(72px, 1.5fr) minmax(65px, 0.6fr) minmax(65px, 0.6fr)'
+              ? 'repeat(10, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(68px, 0.6fr) minmax(68px, 0.6fr)'
               : currentFloorConfig?.dimensions?.cols === 25
               ? (activeZone === 'C5'
-                ? 'minmax(90px, 1.2fr) repeat(2, minmax(42px, 1fr)) minmax(72px, 1.5fr) repeat(10, minmax(42px, 1fr))'
-                : 'minmax(42px, 1fr) repeat(10, minmax(42px, 1fr)) repeat(2, minmax(42px, 1fr)) minmax(72px, 1.5fr) minmax(90px, 1.2fr) minmax(42px, 1fr)')
-              : `repeat(${currentFloorConfig?.dimensions?.cols || 1}, minmax(42px, 1fr))`
+                ? 'minmax(90px, 1.2fr) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) repeat(10, minmax(50px, 1fr))'
+                : 'minmax(50px, 1fr) repeat(10, minmax(50px, 1fr)) repeat(2, minmax(50px, 1fr)) minmax(75px, 1.5fr) minmax(90px, 1.2fr) minmax(50px, 1fr)')
+              : `repeat(${currentFloorConfig?.dimensions?.cols || 1}, minmax(50px, 1fr))`
           }}
         >
           {/* CLUSTER 컴퓨터 좌석 및 회의 공간 통합 구역 패널 배경 */}
@@ -961,7 +990,6 @@ export default function App() {
                             title={`${displayValue} ${isFacilitator ? '(퍼실리테이터)' : ''} ${sCell.occupied ? `(${sCell.user})` : ''}`.trim()}
                           >
                             <span className="cell-text">
-                              {isFacilitator ? '👔 ' : ''}
                               {displayValue}
                             </span>
                           </div>
@@ -1036,7 +1064,9 @@ export default function App() {
                           zIndex: isMatch ? 15 : 2
                         };
 
-                        const displayValue = rawDisplayValue.replace(/[🛗👥🪜🚻🏝️🚷]/gu, '').trim();
+                        const displayValue = rawDisplayValue
+                          .replace(/[🛗👥🪜🚻🏝️🚷]/gu, '')
+                          .trim();
                         
                         const cellClasses = [
                           'grid-cell',
@@ -1192,7 +1222,6 @@ export default function App() {
                     </div>
                   )}
                   <span className="cell-text">
-                    {isFacilitator ? '👔 ' : ''}
                     {displayValue}
                   </span>
                 </div>
@@ -1200,7 +1229,24 @@ export default function App() {
             })
           )}
         </div>
-      </main>
+      </div>
+
+      {/* 모바일 좌우 스크롤 가능 여부 가이드 화살표 */}
+      {isMobile && (
+        <>
+          {scrollIndicators.left && (
+            <div className="scroll-indicator indicator-left">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+          )}
+          {scrollIndicators.right && (
+            <div className="scroll-indicator indicator-right">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          )}
+        </>
+      )}
+    </main>
 
       {/* 토스트 안내 메시지 */}
       {toast && (
@@ -1226,11 +1272,8 @@ export default function App() {
             <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
             
             <div className="modal-header">
-              <span className={`modal-tag ${selectedCell.occupied ? 'seat-occupied' : 'seat-available'}`}>
-                {selectedCell.occupied ? '사용 중 (Occupied)' : '사용 가능 (Available)'}
-              </span>
               {activeFloor === '3F' && (selectedCell.value.includes('r7') || selectedCell.value.includes('r6')) && (
-                <span className="modal-tag" style={{ background: 'rgba(251, 146, 60, 0.15)', color: '#fb923c', border: '1px solid rgba(251, 146, 60, 0.3)', marginLeft: '8px' }}>
+                <span className="modal-tag" style={{ background: 'rgba(251, 146, 60, 0.15)', color: '#fb923c', border: '1px solid rgba(251, 146, 60, 0.3)' }}>
                   퍼실리테이터 지정석
                 </span>
               )}
@@ -1241,10 +1284,6 @@ export default function App() {
               <div className="info-row">
                 <span className="info-label">구역 분류</span>
                 <span className="info-value">{activeFloor} CLUSTER</span>
-              </div>
-              <div className="info-row">
-                <span className="info-label">좌석 위치</span>
-                <span className="info-value">행 {selectedCell.r + 1}, 열 {selectedCell.c + 1}</span>
               </div>
               
               {selectedCell.occupied && selectedCell.user && (

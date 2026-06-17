@@ -27,21 +27,7 @@
   box-shadow: var(--shadow-header);
 }
 
-.header-info h1 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  background: var(--gradient-header-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
-.header-info p {
-  margin: 0;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-}
 
 /* 검색 컨트롤 */
 .search-box {
@@ -131,10 +117,14 @@
 }
 
 .legend-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  border: 1px solid transparent;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.light-theme .legend-color {
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
 }
 
 .legend-color.available {
@@ -223,10 +213,10 @@
 /* 복도 */
 .grid-cell.corridor {
   background: var(--corridor-bg);
-  border: 1px solid var(--corridor-border);
-  color: var(--text-secondary);
+  border: 1.5px solid var(--corridor-border);
+  color: var(--text-primary);
   font-size: clamp(10px, 1.6vh, 15px);
-  font-weight: 700;
+  font-weight: 800;
   opacity: 1;
 }
 
@@ -265,9 +255,9 @@
 /* 편의 구역 */
 .grid-cell.facility {
   background: var(--facility-bg);
-  border: 1px solid var(--facility-border);
+  border: 1.5px solid var(--facility-border);
   color: var(--facility-text);
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
   box-shadow: var(--shadow-facility);
 }
@@ -277,14 +267,14 @@
   background-color: var(--restricted-bg);
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(248, 113, 113, 0.05),
-    rgba(248, 113, 113, 0.05) 8px,
+    rgba(248, 113, 113, 0.08),
+    rgba(248, 113, 113, 0.08) 8px,
     transparent 8px,
     transparent 16px
   );
-  border: 1px solid var(--restricted-border);
+  border: 1.5px solid var(--restricted-border);
   color: var(--restricted-text);
-  font-weight: 600;
+  font-weight: 800;
   text-align: center;
 }
 
@@ -338,9 +328,10 @@
 
 .grid-cell.seat.facilitator {
   background: var(--seat-fac-bg);
-  border: 1px solid var(--seat-fac-border);
+  border: 1.5px solid var(--seat-fac-border);
   color: var(--seat-fac-text);
   box-shadow: var(--shadow-seat);
+  font-weight: 800;
 }
 
 .grid-cell.seat.facilitator.occupied {
@@ -349,27 +340,29 @@
   box-shadow: 0 2px 8px var(--seat-fac-glow);
 }
 
-.grid-cell.seat:hover {
-  transform: translateY(-2px);
-  z-index: 10;
-}
+@media (hover: hover) {
+  .grid-cell.seat:hover {
+    transform: translateY(-2px);
+    z-index: 10;
+  }
 
-.grid-cell.seat:not(.occupied):hover {
-  background: rgba(59, 130, 246, 0.25);
-  border-color: #60a5fa;
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-}
+  .grid-cell.seat:not(.occupied):hover {
+    background: rgba(59, 130, 246, 0.25);
+    border-color: #60a5fa;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  }
 
-.grid-cell.seat.occupied:hover {
-  background: rgba(139, 92, 246, 0.3);
-  border-color: #a78bfa;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
-}
+  .grid-cell.seat.occupied:hover {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: #a78bfa;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+  }
 
-.grid-cell.seat.facilitator:hover {
-  background: rgba(251, 146, 60, 0.25) !important;
-  border-color: #fb923c !important;
-  box-shadow: 0 0 12px rgba(251, 146, 60, 0.5) !important;
+  .grid-cell.seat.facilitator:hover {
+    background: rgba(251, 146, 60, 0.25) !important;
+    border-color: #fb923c !important;
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.5) !important;
+  }
 }
 
 /* 매칭된 하이라이팅 셀 (맥박 애니메이션 + 그라데이션 입체화) */
@@ -761,10 +754,6 @@
 
 /* 층선택 & 구역선택 레이아웃 래퍼 — 한 줄 정렬 */
 .floor-selector-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -809,17 +798,17 @@
 }
 
 .collapsed-zone-block.c6-theme {
-  border: 1px dashed hsla(35, 100%, 50%, 0.35);
-  color: #fb923c;
-  background: linear-gradient(180deg, hsla(35, 100%, 50%, 0.02) 0%, hsla(35, 100%, 50%, 0.08) 100%);
-  text-shadow: 0 0 12px hsla(35, 100%, 50%, 0.4);
+  border: 1.5px solid hsla(35, 100%, 50%, 0.75);
+  color: #ffa85c;
+  background: linear-gradient(180deg, hsla(35, 100%, 50%, 0.08) 0%, hsla(35, 100%, 50%, 0.22) 100%);
+  text-shadow: 0 0 12px hsla(35, 100%, 50%, 0.55);
 }
 
 .collapsed-zone-block.c5-theme {
-  border: 1px dashed hsla(271, 91%, 65%, 0.35);
-  color: #c084fc;
-  background: linear-gradient(180deg, hsla(271, 91%, 65%, 0.02) 0%, hsla(271, 91%, 65%, 0.08) 100%);
-  text-shadow: 0 0 12px hsla(271, 91%, 65%, 0.4);
+  border: 1.5px solid hsla(271, 91%, 65%, 0.75);
+  color: #d8b4fe;
+  background: linear-gradient(180deg, hsla(271, 91%, 65%, 0.08) 0%, hsla(271, 91%, 65%, 0.22) 100%);
+  text-shadow: 0 0 12px hsla(271, 91%, 65%, 0.55);
 }
 
 .collapsed-zone-block:hover {
@@ -851,10 +840,10 @@
 }
 
 .collapsed-hint {
-  font-size: clamp(9px, 1.3vh, 11px);
-  color: var(--text-muted);
-  font-weight: 500;
-  opacity: 0.85;
+  font-size: clamp(9.5px, 1.4vh, 11.5px);
+  color: inherit;
+  font-weight: 800;
+  opacity: 0.95;
   white-space: nowrap;
 }
 
@@ -985,7 +974,6 @@
 }
 
 /* PC 전용 요소 (모바일에서 숨김) */
-.header-top-row { display: none; }
 .header-mobile-actions { display: none; }
 .mobile-search-toggle { display: none; }
 
@@ -1014,28 +1002,7 @@
     gap: 4px;
   }
 
-  /* 헤더 — 1행 compact (타이틀 + 우측 버튼) */
-  .app-header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-    gap: 6px;
-    padding: 6px 10px;
-  }
-
-  /* 모바일 타이틀 행 — 전체 너비 flex */
-  .header-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  /* PC 전용 h1 — 모바일에서 숨김 */
-  .header-info.pc-only {
-    display: none;
-  }
+  /* PC 전용 요소 숨김 */
   .pc-only {
     display: none !important;
   }
@@ -1046,77 +1013,39 @@
     align-items: center;
     gap: 6px;
     flex-shrink: 0;
+    order: 2;
   }
 
-  /* 모바일 검색 토글 버튼 */
-  .mobile-search-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--border-glass);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .mobile-search-toggle.active {
-    background: var(--accent-indigo);
-    border-color: var(--accent-indigo);
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  /* 검색 영역 — 모바일 기본: 숨김, .mobile-open 시 노출 */
+  /* 검색 영역 — 모바일에서 항상 노출 */
   .search-area {
-    display: none;
-    width: 100%;
-  }
-
-  .search-area.mobile-open {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    animation: searchSlideDown 0.22s ease-out;
+    order: 3;
+    width: 100%;
   }
 
-  @keyframes searchSlideDown {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* 헤더 재배치 — 모바일에서는 column 으로 */
+  /* 헤더 재배치 — 모바일에서는 층 선택과 버튼들을 1행으로 wrap 정렬 */
   .app-header {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     flex-shrink: 0;
     gap: 6px;
     padding: 6px 10px;
   }
 
-  /* h1 — 중앙 정렬 & 폰트 축소 */
-  .header-info h1 {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  /* floor-selector-container — absolute 해제 → 한 줄 유지 (높이 증가 방지) */
+  /* floor-selector-container — 제목 위치로 모바일 1행 배치 */
   .floor-selector-container {
-    position: static;
-    transform: none;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    order: 1;
   }
 
 
@@ -1160,16 +1089,16 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* 좌석 그리드 — 3F 17열 기준 충분한 너비, 내부 여백 제거 */
+  /* 좌석 그리드 — 50px 열 크기 기반으로 모바일 화면에서 한 줄 유지를 위해 가로 너비 1200px로 반응형 매칭 */
   .seating-grid {
-    min-width: 900px;
+    min-width: 1200px;
     height: 100%;
     padding: 0;
   }
 
   /* 그리드 셀 — 최소 높이 + z-index로 L-shape 위에 표시 */
   .grid-cell {
-    font-size: 11px;
+    font-size: 10px;
     overflow: hidden;
     min-height: 32px;
     z-index: 3;
@@ -1182,19 +1111,23 @@
     min-height: 60px;
   }
 
-  /* 셀 텍스트 — 한 줄 고정, 넘치면 말줄임 */
+  /* 셀 텍스트 — 1줄로 강제 노출하되 글씨를 반응형(clamp)으로 키움 */
   .cell-text {
-    font-size: 11px;
+    font-size: clamp(10.5px, 1.8vh, 13px);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    overflow: visible;
+    text-overflow: clip;
     max-width: 100%;
   }
 
-  /* 가로 병합 좁은 좌석(회의실 배치)은 2줄 표시 유지 */
+  /* 가로 병합 좁은 좌석(회의실 배치)은 2줄 표시 유지하되 글씨 다른 좌석과 동일 크기로 확대 */
   .grid-cell.seat.narrow-seat .cell-text {
     white-space: pre-line;
-    font-size: 9px;
+    font-size: clamp(10.5px, 1.8vh, 13px);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
     overflow: hidden;
     text-overflow: clip;
   }
@@ -1267,4 +1200,63 @@
     display: block;
   }
 }
+
+/* 배치도 뷰포트 래퍼 (인디케이터 고정 정렬 부모) */
+.map-viewport-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 스크롤 화살표 인디케이터 공통 (프리미엄 인디고 그라데이션 적용하여 시인성 대폭 강화) */
+.scroll-indicator {
+  position: absolute;
+  z-index: 100;
+  background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-purple) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff !important;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* 클릭 방해 금지 */
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5), 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+/* 라이트 테마 대응 */
+.light-theme .scroll-indicator {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4), 0 0 12px rgba(124, 58, 237, 0.2);
+  color: #ffffff !important;
+}
+
+.indicator-left {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulseIndicatorLeft 1.8s infinite ease-in-out;
+}
+.indicator-right {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulseIndicatorRight 1.8s infinite ease-in-out;
+}
+
+
+/* 방향별 펄스 스케일 초기화 보완 */
+@keyframes pulseIndicatorLeft {
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-50%) translateX(-4px) scale(1.08); opacity: 1; }
+}
+@keyframes pulseIndicatorRight {
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-50%) translateX(4px) scale(1.08); opacity: 1; }
+}
+
 

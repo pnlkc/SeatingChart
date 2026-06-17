@@ -14,32 +14,32 @@
   --accent-indigo: #6366f1;
   --accent-purple: #8b5cf6;
   
-  /* 구역별 HSL 상태 변수 */
-  --seat-avail-bg: hsla(217, 91%, 60%, 0.12);
-  --seat-avail-border: hsla(217, 91%, 60%, 0.35);
-  --seat-avail-glow: hsla(217, 91%, 60%, 0.25);
-  --seat-avail-text: #60a5fa;
+  /* 구역별 HSL 상태 변수 (가시성 대폭 보강) */
+  --seat-avail-bg: hsla(217, 91%, 60%, 0.15);
+  --seat-avail-border: hsla(217, 91%, 60%, 0.5);
+  --seat-avail-glow: hsla(217, 91%, 60%, 0.3);
+  --seat-avail-text: #7cd0ff;
 
-  --seat-occ-bg: hsla(271, 91%, 65%, 0.15);
-  --seat-occ-border: hsla(271, 91%, 65%, 0.4);
-  --seat-occ-glow: hsla(271, 91%, 65%, 0.3);
-  --seat-occ-text: #c084fc;
+  --seat-occ-bg: hsla(271, 91%, 65%, 0.18);
+  --seat-occ-border: hsla(271, 91%, 65%, 0.55);
+  --seat-occ-glow: hsla(271, 91%, 65%, 0.35);
+  --seat-occ-text: #d8b4fe;
 
-  --seat-fac-bg: hsla(35, 100%, 50%, 0.12);
-  --seat-fac-border: hsla(35, 100%, 50%, 0.45);
-  --seat-fac-glow: hsla(35, 100%, 50%, 0.25);
-  --seat-fac-text: #fb923c;
+  --seat-fac-bg: hsla(35, 100%, 50%, 0.32);
+  --seat-fac-border: hsla(35, 100%, 50%, 0.95);
+  --seat-fac-glow: hsla(35, 100%, 50%, 0.4);
+  --seat-fac-text: #ffbb55;
 
-  --facility-bg: hsla(160, 84%, 39%, 0.12);
-  --facility-border: hsla(160, 84%, 39%, 0.35);
-  --facility-text: #34d399;
+  --facility-bg: hsla(160, 84%, 39%, 0.3);
+  --facility-border: hsla(160, 84%, 39%, 0.95);
+  --facility-text: #63ffc3;
 
-  --corridor-bg: rgba(255, 255, 255, 0.08);
-  --corridor-border: rgba(255, 255, 255, 0.15);
+  --corridor-bg: rgba(255, 255, 255, 0.22);
+  --corridor-border: rgba(255, 255, 255, 0.6);
 
-  --restricted-bg: hsla(350, 80%, 55%, 0.12);
-  --restricted-border: hsla(350, 80%, 55%, 0.35);
-  --restricted-text: #f87171;
+  --restricted-bg: hsla(350, 80%, 55%, 0.32);
+  --restricted-border: hsla(350, 80%, 55%, 0.95);
+  --restricted-text: #ffb3b3;
 
   /* 디자인 곡률 토큰 변수 */
   --radius-cell: 6px;
@@ -122,31 +122,31 @@ body {
   --text-secondary: #475569;
   --text-muted: #64748b;
   
-  --seat-avail-bg: hsla(217, 91%, 60%, 0.08);
-  --seat-avail-border: hsla(217, 91%, 60%, 0.45);
-  --seat-avail-glow: rgba(59, 130, 246, 0.15);
-  --seat-avail-text: #1d4ed8;
+  --seat-avail-bg: hsla(217, 91%, 60%, 0.14);
+  --seat-avail-border: hsla(217, 91%, 60%, 0.6);
+  --seat-avail-glow: rgba(59, 130, 246, 0.2);
+  --seat-avail-text: #0044cc;
 
-  --seat-occ-bg: hsla(271, 91%, 65%, 0.08);
-  --seat-occ-border: hsla(271, 91%, 65%, 0.5);
-  --seat-occ-glow: rgba(139, 92, 246, 0.15);
-  --seat-occ-text: #6d28d9;
+  --seat-occ-bg: hsla(271, 91%, 65%, 0.14);
+  --seat-occ-border: hsla(271, 91%, 65%, 0.65);
+  --seat-occ-glow: rgba(139, 92, 246, 0.2);
+  --seat-occ-text: #581c87;
 
-  --seat-fac-bg: hsla(35, 100%, 50%, 0.08);
-  --seat-fac-border: hsla(35, 100%, 50%, 0.5);
-  --seat-fac-glow: rgba(249, 115, 22, 0.15);
-  --seat-fac-text: #c2410c;
+  --seat-fac-bg: hsla(35, 100%, 50%, 0.28);
+  --seat-fac-border: hsla(35, 100%, 50%, 0.85);
+  --seat-fac-glow: rgba(249, 115, 22, 0.25);
+  --seat-fac-text: #852500;
 
-  --facility-bg: hsla(160, 84%, 39%, 0.08);
-  --facility-border: hsla(160, 84%, 39%, 0.45);
-  --facility-text: #047857;
+  --facility-bg: hsla(160, 84%, 39%, 0.26);
+  --facility-border: hsla(160, 84%, 39%, 0.85);
+  --facility-text: #014732;
 
-  --corridor-bg: rgba(0, 0, 0, 0.04);
-  --corridor-border: rgba(0, 0, 0, 0.1);
+  --corridor-bg: rgba(0, 0, 0, 0.15);
+  --corridor-border: rgba(0, 0, 0, 0.45);
 
-  --restricted-bg: hsla(350, 80%, 55%, 0.08);
-  --restricted-border: hsla(350, 80%, 55%, 0.45);
-  --restricted-text: #b91c1c;
+  --restricted-bg: hsla(350, 80%, 55%, 0.26);
+  --restricted-border: hsla(350, 80%, 55%, 0.85);
+  --restricted-text: #7f1d1d;
 
   /* 밝은모드용 부드러운 그림자 조정 */
   --shadow-header: 0 4px 18px rgba(15, 23, 42, 0.05);
