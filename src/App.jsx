@@ -1361,34 +1361,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* 모바일 전용 플로팅 보조 줌 컨트롤러 */}
-      {isMobile && (
-        <div className="zoom-controls">
-          <button
-            className="zoom-btn"
-            onClick={() => setZoom((prev) => Math.max(prev - 0.2, 0.6))}
-            disabled={zoom <= 0.6}
-            title="축소"
-          >
-            ➖
-          </button>
-          <button
-            className="zoom-btn zoom-reset-btn"
-            onClick={() => setZoom(1)}
-            title="기본 배율 초기화"
-          >
-            🔄
-          </button>
-          <button
-            className="zoom-btn"
-            onClick={() => setZoom((prev) => Math.min(prev + 0.2, 2.0))}
-            disabled={zoom >= 2.0}
-            title="확대"
-          >
-            ➕
-          </button>
-        </div>
-      )}
 
       {/* 모바일 좌우 스크롤 가능 여부 가이드 화살표 */}
       {isMobile && (
