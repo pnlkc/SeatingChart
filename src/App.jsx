@@ -71,8 +71,12 @@ function AreaIcon({ name, size = 18 }) {
 
 export default function App() {
   const floors = useMemo(() => Object.keys(rawSeatingData), []);
-  const [activeFloor, setActiveFloor] = useState('3F');
-  const [activeZone, setActiveZone] = useState('C5');
+  const [activeFloor, setActiveFloor] = useState(() => {
+    return localStorage.getItem('seating_chart_floor') || '3F';
+  });
+  const [activeZone, setActiveZone] = useState(() => {
+    return localStorage.getItem('seating_chart_zone') || 'C5';
+  });
 
   const activeFloorRef = useRef(activeFloor);
   const activeZoneRef = useRef(activeZone);
@@ -105,7 +109,10 @@ export default function App() {
   }, []);
 
   // 모바일 줌 상태 정의 (60% ~ 200%)
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(() => {
+    const saved = localStorage.getItem('seating_chart_zoom');
+    return saved ? parseFloat(saved) : 1;
+  });
   const zoomRef = useRef(zoom);
   const touchCenterRef = useRef({ relativeX: 0, relativeY: 0, contentX: 0, contentY: 0 });
 
@@ -114,11 +121,53 @@ export default function App() {
   }, [zoom]);
 
   // 뷰 방향 상태 정의: 'elevator' (엘리베이터 기준 - 기본값), 'stairs' (계단 기준)
-  const [viewDirection, setViewDirection] = useState('elevator');
+  const [viewDirection, setViewDirection] = useState(() => {
+    return localStorage.getItem('seating_chart_view_direction') || 'elevator';
+  });
 
-  // 층/구역 전환 시 줌 100% 초기화 (뷰 방향 상태는 그대로 유지)
+  // 상태 변경 시 로컬스토리지 실시간 보존 이펙트
   useEffect(() => {
-    setZoom(1);
+    localStorage.setItem('seating_chart_floor', activeFloor);
+  }, [activeFloor]);
+
+  useEffect(() => {
+    localStorage.setItem('seating_chart_zone', activeZone);
+  }, [activeZone]);
+
+  useEffect(() => {
+    localStorage.setItem('seating_chart_view_direction', viewDirection);
+  }, [viewDirection]);
+
+  useEffect(() => {
+    localStorage.setItem('seating_chart_zoom', zoom.toString());
+  }, [zoom]);
+
+  // 층/구역 변경 시 해당 층/구역의 마지막 스크롤 위치 복원 (렌더링 딜레이 250ms로 넉넉하게 지정하여 줌 확대 상태 복원 시 크기 갱신 엇갈림 해결)
+  useEffect(() => {
+    const el = mapViewportRef.current;
+    if (!el) return;
+
+    const timer = setTimeout(() => {
+      const savedLeft = localStorage.getItem(`seating_chart_scroll_left_${activeFloor}_${activeZone}`);
+      const savedTop = localStorage.getItem(`seating_chart_scroll_top_${activeFloor}_${activeZone}`);
+
+      if (savedLeft !== null) {
+        el.scrollLeft = parseFloat(savedLeft);
+      } else {
+        el.scrollLeft = 0;
+      }
+
+      if (savedTop !== null) {
+        el.scrollTop = parseFloat(savedTop);
+      } else {
+        el.scrollTop = 0;
+      }
+
+      // 스크롤 인디케이터 즉시 갱신
+      checkScrollIndicators();
+    }, 250);
+
+    return () => clearTimeout(timer);
   }, [activeFloor, activeZone]);
 
   // 모바일 브라우저 자체 줌(핀치 줌, 더블 탭 줌) 방지
@@ -232,6 +281,16 @@ export default function App() {
   });
 
   const scrollTickingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+
+  // 스크롤 디바운스 타이머 클린업
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const checkScrollIndicators = () => {
     const el = mapViewportRef.current;
@@ -251,11 +310,24 @@ export default function App() {
     });
   };
 
-  // requestAnimationFrame 기반의 스크롤 최적화(Throttling) 적용
+  // requestAnimationFrame 기반의 스크롤 최적화(Throttling) 및 디바운스 위치 저장 적용
   const handleViewportScroll = () => {
     if (!scrollTickingRef.current) {
       window.requestAnimationFrame(() => {
         checkScrollIndicators();
+
+        // 스크롤 위치를 층/구역별로 로컬스토리지에 디바운스(150ms) 저장
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+        scrollTimeoutRef.current = setTimeout(() => {
+          const el = mapViewportRef.current;
+          if (el) {
+            localStorage.setItem(`seating_chart_scroll_left_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollLeft.toString());
+            localStorage.setItem(`seating_chart_scroll_top_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollTop.toString());
+          }
+        }, 150);
+
         scrollTickingRef.current = false;
       });
       scrollTickingRef.current = true;
