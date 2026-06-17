@@ -1414,7 +1414,9 @@ export default function App() {
             <div className="modal-body">
               <div className="info-row">
                 <span className="info-label">구역 분류</span>
-                <span className="info-value">{activeFloor} CLUSTER</span>
+                <span className="info-value">
+                  {activeFloor} CLUSTER{activeFloor === '5F' ? ` (${activeZone} 구역)` : ''}
+                </span>
               </div>
               
               {selectedCell.occupied && selectedCell.user && (
