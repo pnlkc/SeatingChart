@@ -1549,6 +1549,7 @@ export default function App() {
                 {toast.statusText !== '공석' && (
                   <span className="toast-status"> ({toast.statusText})</span>
                 )}
+                <span className="toast-divider"></span>
                 <strong className="toast-floor">{toast.floorDesc}</strong>
                 {toast.zoneDesc && <span className="toast-zone">{toast.zoneDesc}</span>}
                 {' '}엘리베이터 기준{' '}

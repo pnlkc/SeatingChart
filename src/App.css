@@ -897,6 +897,19 @@
   margin-right: 4px;
 }
 
+.toast-divider {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.light-theme .toast-divider {
+  background: rgba(15, 23, 42, 0.15);
+}
+
 .toast-status {
   color: var(--text-muted);
   font-size: 0.85em;
