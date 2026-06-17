@@ -893,7 +893,7 @@ export default function App() {
             <input
               type="text"
               className="search-input"
-              placeholder="좌석 번호, 구역 또는 입실자 검색..."
+              placeholder="좌석 번호, 구역 또는 퍼실리테이터 검색..."
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={(e) => {
