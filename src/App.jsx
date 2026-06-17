@@ -630,25 +630,21 @@ export default function App() {
     // 1. 층/구역 키워드 단독 검색 시, 해당 층/구역 전환만 처리하고 토스트 팝업은 띄우지 않음
     if (['3f', '3층'].includes(cleanQuery)) {
       setActiveFloor('3F');
-      setSearchQuery('');
       return;
     }
     if (['5f', '5층'].includes(cleanQuery)) {
       setActiveFloor('5F');
       setActiveZone('C5');
-      setSearchQuery('');
       return;
     }
     if (['c5', 'c5구역'].includes(cleanQuery)) {
       setActiveFloor('5F');
       setActiveZone('C5');
-      setSearchQuery('');
       return;
     }
     if (['c6', 'c6구역'].includes(cleanQuery)) {
       setActiveFloor('5F');
       setActiveZone('C6');
-      setSearchQuery('');
       return;
     }
 
