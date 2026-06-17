@@ -622,6 +622,36 @@ export default function App() {
     const query = searchQuery.trim().toLowerCase();
     if (query.length < 2) return; // 2글자 미만은 검색 무시
 
+    // 기존 팝업 알림 초기화
+    setToast(null);
+
+    const cleanQuery = query.replace(/\s+/g, '');
+    
+    // 1. 층/구역 키워드 단독 검색 시, 해당 층/구역 전환만 처리하고 토스트 팝업은 띄우지 않음
+    if (['3f', '3층'].includes(cleanQuery)) {
+      setActiveFloor('3F');
+      setSearchQuery('');
+      return;
+    }
+    if (['5f', '5층'].includes(cleanQuery)) {
+      setActiveFloor('5F');
+      setActiveZone('C5');
+      setSearchQuery('');
+      return;
+    }
+    if (['c5', 'c5구역'].includes(cleanQuery)) {
+      setActiveFloor('5F');
+      setActiveZone('C5');
+      setSearchQuery('');
+      return;
+    }
+    if (['c6', 'c6구역'].includes(cleanQuery)) {
+      setActiveFloor('5F');
+      setActiveZone('C6');
+      setSearchQuery('');
+      return;
+    }
+
     // 현재 보고 있는 층을 1순위로 탐색하도록 정렬된 리스트 생성
     const sortedFloors = [activeFloor, ...floors.filter(f => f !== activeFloor)];
 
@@ -716,41 +746,87 @@ export default function App() {
     }
 
     // [2단계] 부분 일치 (Partial Match, includes) 백업 검사
-    // 2-1. 좌석 번호 또는 사용자 이름 부분 일치 검사
-    for (const floor of sortedFloors) {
-      const grid = gridState[floor];
-      if (!grid) continue;
+    // 단순 구역 식별자인 'c5', 'c6' 등은 위 1번 분기에서 처리되었으나,
+    // 오작동 방지를 위해 부분 매칭 검색어로 구역 접두사만 오는 경우는 부분 매치에서 제외합니다.
+    if (!['c5', 'c6', 'c5-', 'c6-'].includes(query)) {
+      // 2-1. 좌석 번호 또는 사용자 이름 부분 일치 검사
+      for (const floor of sortedFloors) {
+        const grid = gridState[floor];
+        if (!grid) continue;
 
-      for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[r].length; c++) {
-          const cell = grid[r][c];
-          if (cell.type !== 'seat') continue;
+        for (let r = 0; r < grid.length; r++) {
+          for (let c = 0; c < grid[r].length; c++) {
+            const cell = grid[r][c];
+            if (cell.type !== 'seat') continue;
 
-          const seatValue = (cell.value || '').toLowerCase();
-          const userName = (cell.user || '').toLowerCase();
+            const seatValue = (cell.value || '').toLowerCase();
+            const userName = (cell.user || '').toLowerCase();
 
-          if (seatValue.includes(query) || userName.includes(query)) {
+            if (seatValue.includes(query) || userName.includes(query)) {
+              setActiveFloor(floor);
+              let targetZone = '';
+              if (floor === '5F') {
+                if (seatValue.startsWith('c5') || (c >= 15 && c <= 23)) {
+                  setActiveZone('C5');
+                  targetZone = 'C5 구역';
+                } else if (seatValue.startsWith('c6') || (c >= 2 && c <= 11)) {
+                  setActiveZone('C6');
+                  targetZone = 'C6 구역';
+                }
+              }
+
+              const elevatorCol = floor === '3F' ? 11 : 14;
+              const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
+              const statusText = cell.occupied ? `${cell.user}님 사용 중` : '공석';
+              const floorDesc = floor === '3F' ? '3층' : '5층';
+              const zoneDesc = targetZone ? ` (${targetZone})` : '';
+
+              showToast({
+                seatName: cell.value.toUpperCase(),
+                statusText,
+                floorDesc,
+                zoneDesc,
+                direction
+              });
+              return; // 부분 매칭 성공 시 즉시 종료
+            }
+          }
+        }
+      }
+
+      // 2-2. 편의시설 명칭 부분 일치 검사
+      for (const floor of sortedFloors) {
+        const floorConfig = rawSeatingData[floor];
+        if (!floorConfig || !floorConfig.mergeCells) continue;
+
+        for (const mc of floorConfig.mergeCells) {
+          const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷]/gu, '').trim().toLowerCase();
+          if (cleanVal.includes(query)) {
             setActiveFloor(floor);
             let targetZone = '';
             if (floor === '5F') {
-              if (seatValue.startsWith('c5') || (c >= 15 && c <= 23)) {
+              const startCol = mc.startCol;
+              if (startCol >= 15 && startCol <= 23) {
                 setActiveZone('C5');
                 targetZone = 'C5 구역';
-              } else if (seatValue.startsWith('c6') || (c >= 2 && c <= 11)) {
+              } else if (startCol >= 2 && startCol <= 11) {
                 setActiveZone('C6');
                 targetZone = 'C6 구역';
               }
             }
 
             const elevatorCol = floor === '3F' ? 11 : 14;
-            const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
-            const statusText = cell.occupied ? `${cell.user}님 사용 중` : '공석';
+            const direction = (mc.startCol <= elevatorCol && mc.endCol >= elevatorCol)
+              ? '중앙'
+              : mc.startCol < elevatorCol
+              ? '좌측'
+              : '우측';
             const floorDesc = floor === '3F' ? '3층' : '5층';
             const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
             showToast({
-              seatName: cell.value.toUpperCase(),
-              statusText,
+              seatName: cleanVal,
+              statusText: '공용시설',
               floorDesc,
               zoneDesc,
               direction
@@ -761,47 +837,11 @@ export default function App() {
       }
     }
 
-    // 2-2. 편의시설 명칭 부분 일치 검사
-    for (const floor of sortedFloors) {
-      const floorConfig = rawSeatingData[floor];
-      if (!floorConfig || !floorConfig.mergeCells) continue;
-
-      for (const mc of floorConfig.mergeCells) {
-        const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷]/gu, '').trim().toLowerCase();
-        if (cleanVal.includes(query)) {
-          setActiveFloor(floor);
-          let targetZone = '';
-          if (floor === '5F') {
-            const startCol = mc.startCol;
-            if (startCol >= 15 && startCol <= 23) {
-              setActiveZone('C5');
-              targetZone = 'C5 구역';
-            } else if (startCol >= 2 && startCol <= 11) {
-              setActiveZone('C6');
-              targetZone = 'C6 구역';
-            }
-          }
-
-          const elevatorCol = floor === '3F' ? 11 : 14;
-          const direction = (mc.startCol <= elevatorCol && mc.endCol >= elevatorCol)
-            ? '중앙'
-            : mc.startCol < elevatorCol
-            ? '좌측'
-            : '우측';
-          const floorDesc = floor === '3F' ? '3층' : '5층';
-          const zoneDesc = targetZone ? ` (${targetZone})` : '';
-
-          showToast({
-            seatName: cleanVal,
-            statusText: '공용시설',
-            floorDesc,
-            zoneDesc,
-            direction
-          });
-          return; // 부분 매칭 성공 시 즉시 종료
-        }
-      }
-    }
+    // [3단계] 아무 매칭 결과도 찾지 못했을 때
+    showToast({
+      isSimpleText: true,
+      text: "일치하는 좌석이나 퍼실리테이터를 찾을 수 없습니다."
+    });
   };
 
   // 6. 현재 층의 통계 계산
@@ -1382,17 +1422,26 @@ export default function App() {
       {/* 토스트 안내 메시지 */}
       {toast && (
         <div className="toast-message">
-          <span className="toast-icon">📍</span>
-          <span className="toast-text">
-            <span className="toast-seat">{toast.seatName}</span>
-            {toast.statusText !== '공석' && (
-              <span className="toast-status"> ({toast.statusText})</span>
-            )}
-            <strong className="toast-floor">{toast.floorDesc}</strong>
-            {toast.zoneDesc && <span className="toast-zone">{toast.zoneDesc}</span>}
-            {' '}엘리베이터 기준{' '}
-            <strong className="toast-dir">{toast.direction}</strong>에 위치해 있습니다.
-          </span>
+          {toast.isSimpleText ? (
+            <>
+              <span className="toast-icon">⚠️</span>
+              <span className="toast-text">{toast.text}</span>
+            </>
+          ) : (
+            <>
+              <span className="toast-icon">📍</span>
+              <span className="toast-text">
+                <span className="toast-seat">{toast.seatName}</span>
+                {toast.statusText !== '공석' && (
+                  <span className="toast-status"> ({toast.statusText})</span>
+                )}
+                <strong className="toast-floor">{toast.floorDesc}</strong>
+                {toast.zoneDesc && <span className="toast-zone">{toast.zoneDesc}</span>}
+                {' '}엘리베이터 기준{' '}
+                <strong className="toast-dir">{toast.direction}</strong>에 위치해 있습니다.
+              </span>
+            </>
+          )}
         </div>
       )}
 
