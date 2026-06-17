@@ -89,10 +89,13 @@ export default function App() {
     activeZoneRef.current = activeZone;
   }, [activeZone]);
 
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(() => {
+    return localStorage.getItem('seating_chart_light_theme') === 'true';
+  });
 
   useEffect(() => {
     document.body.classList.toggle('light-theme', isLightTheme);
+    localStorage.setItem('seating_chart_light_theme', isLightTheme.toString());
   }, [isLightTheme]);
 
   const [toast, setToast] = useState(null);
