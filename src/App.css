@@ -223,7 +223,20 @@
   font-weight: 800;
   opacity: 1;
 }
-
+.grid-cell.corridor.facilitator {
+  background: var(--seat-fac-bg);
+  border: 1.5px solid var(--seat-fac-border);
+  color: var(--seat-fac-text);
+  box-shadow: var(--shadow-seat);
+  font-weight: 800;
+}
+.grid-cell.facility.facilitator {
+  background: var(--seat-fac-bg);
+  border: 1.5px solid var(--seat-fac-border);
+  color: var(--seat-fac-text);
+  box-shadow: var(--shadow-seat);
+  font-weight: 800;
+}
 .grid-cell.corridor.horizontal {
   margin-right: -4px; /* gap 3px + border 두께를 메워 포개지게 만듦 */
   z-index: 3;
@@ -805,32 +818,40 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-.collapsed-zone-block.c6-theme {
-  border: 1.5px solid hsla(35, 100%, 50%, 0.75);
-  color: #ffa85c;
-  background: linear-gradient(180deg, hsla(35, 100%, 50%, 0.08) 0%, hsla(35, 100%, 50%, 0.22) 100%);
-  text-shadow: 0 0 12px hsla(35, 100%, 50%, 0.55);
+.collapsed-zone-block.c2-theme {
+  border: 1.5px solid hsla(50, 100%, 50%, 0.75);
+  color: #ffe066;
+  background: linear-gradient(180deg, hsla(50, 100%, 50%, 0.08) 0%, hsla(50, 100%, 50%, 0.22) 100%);
+  text-shadow: 0 0 12px hsla(50, 100%, 50%, 0.55);
 }
 
-.collapsed-zone-block.c5-theme {
-  border: 1.5px solid hsla(271, 91%, 65%, 0.75);
-  color: #d8b4fe;
-  background: linear-gradient(180deg, hsla(271, 91%, 65%, 0.08) 0%, hsla(271, 91%, 65%, 0.22) 100%);
-  text-shadow: 0 0 12px hsla(271, 91%, 65%, 0.55);
-}
-
-/* 라이트 테마 대응 - 접힌 구역 블록 고가독성 대비 스타일 */
-.light-theme .collapsed-zone-block.c6-theme {
-  border: 1.5px solid hsla(35, 100%, 40%, 0.75);
-  color: #c2410c;
-  background: linear-gradient(180deg, hsla(35, 100%, 50%, 0.06) 0%, hsla(35, 100%, 50%, 0.15) 100%);
+.collapsed-zone-block.c1-theme {
+  /* border: 1.5px solid hsla(50, 100%, 50%, 0.75);
+  color: #ffe066;
+  background: linear-gradient(180deg, hsla(50, 100%, 50%, 0.08) 0%, hsla(50, 100%, 50%, 0.22) 100%);
+  text-shadow: 0 0 12px hsla(50, 100%, 50%, 0.55); */
+  border: 1.5px solid hsla(50, 100%, 50%, 0.9);
+  color: #1a1a0a;
+  background: linear-gradient(180deg, hsla(50, 100%, 55%, 0.95) 0%, hsla(50, 100%, 55%, 0.68) 100%);
   text-shadow: none;
 }
 
-.light-theme .collapsed-zone-block.c5-theme {
-  border: 1.5px solid hsla(271, 91%, 50%, 0.75);
-  color: #7c3aed;
-  background: linear-gradient(180deg, hsla(271, 91%, 65%, 0.06) 0%, hsla(271, 91%, 65%, 0.15) 100%);
+/* 라이트 테마 대응 - 접힌 구역 블록 고가독성 대비 스타일 */
+.light-theme .collapsed-zone-block.c2-theme {
+  border: 1.5px solid hsla(50, 100%, 35%, 0.75);
+  color: #a16207;
+  background: linear-gradient(180deg, hsla(50, 100%, 50%, 0.06) 0%, hsla(50, 100%, 50%, 0.15) 100%);
+  text-shadow: none;
+}
+
+.light-theme .collapsed-zone-block.c1-theme {
+  /* border: 1.5px solid hsla(50, 100%, 35%, 0.75);
+  color: #a16207;
+  background: linear-gradient(180deg, hsla(50, 100%, 50%, 0.06) 0%, hsla(50, 100%, 50%, 0.15) 100%);
+  text-shadow: none; */
+  border: 1.5px solid hsla(50, 100%, 35%, 0.9);
+  color: #3a2f05;
+  background: linear-gradient(180deg, hsla(50, 95%, 62%, 1) 0%, hsla(50, 95%, 62%, 0.75) 100%);
   text-shadow: none;
 }
 
@@ -839,14 +860,16 @@
   z-index: 20;
 }
 
-.collapsed-zone-block.c6-theme:hover {
-  border-color: #fb923c;
-  box-shadow: 0 0 20px hsla(35, 100%, 50%, 0.25);
+.collapsed-zone-block.c2-theme:hover {
+  border-color: #fde047;
+  box-shadow: 0 0 20px hsla(50, 100%, 50%, 0.25);
 }
 
-.collapsed-zone-block.c5-theme:hover {
-  border-color: #c084fc;
-  box-shadow: 0 0 20px hsla(271, 91%, 65%, 0.25);
+.collapsed-zone-block.c1-theme:hover {
+  /* border-color: #fde047;
+  box-shadow: 0 0 20px hsla(50, 100%, 50%, 0.25); */
+  border-color: #fde047;
+  box-shadow: 0 0 20px hsla(50, 100%, 50%, 0.45);
 }
 
 .collapsed-title {
