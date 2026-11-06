@@ -1371,11 +1371,6 @@ export default function App() {
                           >
                             <span className="cell-text">
                               {displayValue}
-                              {cCell.user === '스턴' && (
-                                <span className="cell-subtext" style={{ fontSize: '0.72em', opacity: 0.95, fontWeight: 700, display: 'block' }}>
-                                  스턴
-                                </span>
-                              )}
                             </span>
                           </div>
                         );
