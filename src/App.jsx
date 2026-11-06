@@ -101,6 +101,39 @@ function AreaIcon({ name, size = 18 }) {
   return null;
 }
 
+const FACILITATORS = {
+  table: {
+    startRow: 3,
+    startCol: 22,
+    names: ['찹츄', '카피바라', '스카이'],
+    label: '테이블'
+  },
+  meetingRoom: {
+    startRow: 3,
+    startCol: 20,
+    names: ['몽키', '워터', '포그'],
+    label: '회의실'
+  },
+  stern: {
+    seatValue: 'c1r1s9',
+    alias: 'c1r9s1',
+    name: '스턴',
+    label: 'C1R1S9'
+  }
+};
+
+const checkIsFacilitator = (cell, mergeInfo) => {
+  if (mergeInfo?.isStart && mergeInfo.startRow === 3) {
+    if (mergeInfo.startCol === 20 || mergeInfo.startCol === 22) return true;
+  }
+  if (cell) {
+    const v = (cell.value || '').toLowerCase();
+    const u = (cell.user || '').toLowerCase();
+    if (v === 'c1r1s9' || v === 'c1r9s1' || u === '스턴' || cell.isFacilitator) return true;
+  }
+  return false;
+};
+
 export default function App() {
   const floors = useMemo(() => Object.keys(rawSeatingData), []);
   const [activeFloor, setActiveFloor] = useState(() => {
@@ -134,6 +167,97 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const toastTimeoutRef = useRef(null);
   const mapViewportRef = useRef(null);
+
+  // 모바일 좌우 스크롤 상태 감지
+  const [scrollIndicators, setScrollIndicators] = useState({
+    left: false,
+    right: false
+  });
+
+  const scrollTickingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+  const scrollIndicatorTimeoutRef = useRef(null);
+
+  // 스크롤 디바운스 타이머 클린업
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      if (scrollIndicatorTimeoutRef.current) {
+        clearTimeout(scrollIndicatorTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const checkScrollIndicators = () => {
+    const el = mapViewportRef.current;
+    if (!el) return;
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const isAtLeftEnd = el.scrollLeft <= 20;
+    const isAtRightEnd = el.scrollLeft >= maxScroll - 20;
+
+    let canScrollLeft = el.scrollLeft > 20;
+    let canScrollRight = el.scrollLeft < maxScroll - 20;
+
+    // 모바일에서 구역 끝에 도달했을 때 불필요한 인디케이터 노출 차단
+    // C1 구역에서는 오른쪽 끝(C1 본진 좌석)에 있을 때 왼쪽 버튼 노출 차단
+    // C2 구역에서는 왼쪽 끝(C2 본진 좌석)에 있을 때 오른쪽 버튼 노출 차단
+    if (activeZoneRef.current === 'C1' && isAtRightEnd) {
+      canScrollLeft = false;
+    }
+    if (activeZoneRef.current === 'C2' && isAtLeftEnd) {
+      canScrollRight = false;
+    }
+
+    if (maxScroll <= 5) {
+      canScrollLeft = false;
+      canScrollRight = false;
+    }
+
+    setScrollIndicators((prev) => {
+      if (prev.left === canScrollLeft && prev.right === canScrollRight) {
+        return prev;
+      }
+      return {
+        left: canScrollLeft,
+        right: canScrollRight
+      };
+    });
+
+    // 스크롤이 멈추면 1.2초 후 인디케이터 숨김 처리
+    if (scrollIndicatorTimeoutRef.current) {
+      clearTimeout(scrollIndicatorTimeoutRef.current);
+    }
+    scrollIndicatorTimeoutRef.current = setTimeout(() => {
+      setScrollIndicators({ left: false, right: false });
+    }, 1200);
+  };
+
+  // requestAnimationFrame 기반의 스크롤 최적화(Throttling) 및 디바운스 위치 저장 적용
+  const handleViewportScroll = () => {
+    if (!scrollTickingRef.current) {
+      window.requestAnimationFrame(() => {
+        checkScrollIndicators();
+
+        // 스크롤 위치를 층/구역별로 로컬스토리지에 디바운스(150ms) 저장
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+        scrollTimeoutRef.current = setTimeout(() => {
+          const el = mapViewportRef.current;
+          if (el) {
+            localStorage.setItem(`seating_chart_scroll_left_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollLeft.toString());
+            localStorage.setItem(`seating_chart_scroll_top_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollTop.toString());
+          }
+        }, 150);
+
+        scrollTickingRef.current = false;
+      });
+      scrollTickingRef.current = true;
+    }
+  };
 
   // 모바일 여부 감지 (matchMedia 기반, 화면 회전/리사이즈 대응)
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 768px)').matches);
@@ -190,7 +314,11 @@ export default function App() {
       if (savedLeft !== null) {
         el.scrollLeft = parseFloat(savedLeft);
       } else {
-        el.scrollLeft = 0;
+        if (activeFloor === '2F' && activeZone === 'C1') {
+          el.scrollLeft = el.scrollWidth - el.clientWidth;
+        } else {
+          el.scrollLeft = 0;
+        }
       }
 
       if (savedTop !== null) {
@@ -310,65 +438,17 @@ export default function App() {
     };
   }, [isMobile]);
 
-  // 모바일 좌우 스크롤 상태 감지
-  const [scrollIndicators, setScrollIndicators] = useState({
-    left: false,
-    right: false
-  });
-
-  const scrollTickingRef = useRef(false);
-  const scrollTimeoutRef = useRef(null);
-
-  // 스크롤 디바운스 타이머 클린업
   useEffect(() => {
+    const timer = setTimeout(() => {
+      checkScrollIndicators();
+    }, 400); // 렌더링 완료 타이밍 보장
+    
+    window.addEventListener('resize', checkScrollIndicators);
     return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkScrollIndicators);
     };
-  }, []);
-
-  const checkScrollIndicators = () => {
-    const el = mapViewportRef.current;
-    if (!el) return;
-    const canScrollLeft = el.scrollLeft > 1;
-    const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 1;
-
-    // 상태 변화가 실제로 일어났을 때만 리렌더링하도록 bailout 방어 처리
-    setScrollIndicators((prev) => {
-      if (prev.left === canScrollLeft && prev.right === canScrollRight) {
-        return prev;
-      }
-      return {
-        left: canScrollLeft,
-        right: canScrollRight
-      };
-    });
-  };
-
-  // requestAnimationFrame 기반의 스크롤 최적화(Throttling) 및 디바운스 위치 저장 적용
-  const handleViewportScroll = () => {
-    if (!scrollTickingRef.current) {
-      window.requestAnimationFrame(() => {
-        checkScrollIndicators();
-
-        // 스크롤 위치를 층/구역별로 로컬스토리지에 디바운스(150ms) 저장
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
-        scrollTimeoutRef.current = setTimeout(() => {
-          const el = mapViewportRef.current;
-          if (el) {
-            localStorage.setItem(`seating_chart_scroll_left_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollLeft.toString());
-            localStorage.setItem(`seating_chart_scroll_top_${activeFloorRef.current}_${activeZoneRef.current}`, el.scrollTop.toString());
-          }
-        }, 150);
-
-        scrollTickingRef.current = false;
-      });
-      scrollTickingRef.current = true;
-    }
-  };
+  }, [activeFloor, activeZone]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -398,13 +478,6 @@ export default function App() {
   };
 
   const colMap = useMemo(() => {
-    if (activeFloor === '3F') {
-      const map = {};
-      for (let i = 0; i <= 11; i++) map[i] = i;
-      for (let i = 12; i <= 14; i++) map[i] = 12;
-      for (let i = 15; i <= 16; i++) map[i] = 13;
-      return map;
-    }
     if (activeZone === 'C1') {
       return {
         0: 0,
@@ -422,7 +495,7 @@ export default function App() {
         24: 15
       };
     }
-  }, [activeFloor, activeZone]);
+  }, [activeZone]);
 
   // 1. 초기 층별 그리드 상태 맵 설정
   const [gridState] = useState(() => {
@@ -433,9 +506,10 @@ export default function App() {
           if (cell.type === 'seat') {
             return {
               ...cell,
-              occupied: false,
-              user: null,
-              assignedTime: null,
+              occupied: cell.occupied || false,
+              user: cell.user || null,
+              assignedTime: cell.assignedTime || null,
+              isFacilitator: cell.isFacilitator || false,
             };
           }
           return cell;
@@ -465,7 +539,7 @@ export default function App() {
 
   // 2. 현재 선택된 층의 데이터셋 단축 바인딩
   const currentFloorConfig = rawSeatingData[activeFloor];
-  const currentGrid = gridState[activeFloor] || [];
+  const currentGrid = useMemo(() => gridState[activeFloor] || [], [gridState, activeFloor]);
 
   // 3. 현재 층의 병합 셀 영역 캐싱 맵 (O(1) 조회를 위함)
   const mergeMap = useMemo(() => {
@@ -521,21 +595,39 @@ export default function App() {
       return map;
     }
     
+    const isFacilitatorSearch = ['퍼실', '퍼실리테이터'].some(term => query.includes(term) || term.includes(query));
+
     currentGrid.forEach((row, r) => {
       row.forEach((cell, c) => {
         const key = `${r},${c}`;
         const mergeInfo = mergeMap[key];
         if (cell.type === 'empty' && !mergeInfo) return;
-        /* eslint-disable no-misleading-character-class */
+        
         const displayVal = (mergeInfo ? mergeInfo.value : (cell.value || ''))
-          .replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '')
+          .replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '')
           .trim()
           .toLowerCase();
-        /* eslint-enable no-misleading-character-class */
         
-        const matchesValue = displayVal.includes(query);
+        const isFac = checkIsFacilitator(cell, mergeInfo);
+
+        if (isFacilitatorSearch && isFac) {
+          map[key] = true;
+          return;
+        }
+
+        const matchesValue = displayVal.includes(query) || (cell.value === 'c1r1s9' && query.includes('c1r9s1'));
         const matchesUser = cell.user && cell.user.toLowerCase().includes(query);
-        if (matchesValue || matchesUser) {
+        
+        let matchesFacilitator = false;
+        if (mergeInfo?.startRow === 3 && mergeInfo?.startCol === 22) {
+          matchesFacilitator = FACILITATORS.table.names.some(name => name.toLowerCase().includes(query) || query.includes(name.toLowerCase()));
+        } else if (mergeInfo?.startRow === 3 && mergeInfo?.startCol === 20) {
+          matchesFacilitator = FACILITATORS.meetingRoom.names.some(name => name.toLowerCase().includes(query) || query.includes(name.toLowerCase()));
+        } else if (cell.value === 'c1r1s9' || cell.value === 'c1r9s1' || cell.user === '스턴') {
+          matchesFacilitator = '스턴'.includes(query) || query.includes('스턴');
+        }
+
+        if (matchesValue || matchesUser || matchesFacilitator) {
           map[key] = true;
         }
       });
@@ -561,10 +653,8 @@ export default function App() {
     if (q.length < 2) return; // 2글자 미만은 스킵
 
     const timer = setTimeout(() => {
-      // 1. 현재 층/구역에 매칭 결과가 존재하는지 확인
-      const curFloor = activeFloorRef.current;
       const curZone = activeZoneRef.current;
-      const grid = gridState[curFloor];
+      const grid = gridState['2F'];
       
       let hasMatchInCurrentPage = false;
       if (grid) {
@@ -573,17 +663,14 @@ export default function App() {
             const cell = grid[r][c];
             if (cell.type !== 'seat') continue;
             
-            // 5F인 경우 현재 구역 내 영역인지 체크
-            if (curFloor === '2F') {
-              const isC1 = (cell.value || '').toLowerCase().startsWith('c1') || (c >= 15 && c <= 23);
-              const isC2 = (cell.value || '').toLowerCase().startsWith('c2') || (c >= 2 && c <= 11);
-              if (curZone === 'C1' && !isC1) continue;
-              if (curZone === 'C2' && !isC2) continue;
-            }
+            const isC1 = (cell.value || '').toLowerCase().startsWith('c1') || (c >= 15 && c <= 23);
+            const isC2 = (cell.value || '').toLowerCase().startsWith('c2') || (c >= 2 && c <= 11);
+            if (curZone === 'C1' && !isC1) continue;
+            if (curZone === 'C2' && !isC2) continue;
 
             const seatValue = (cell.value || '').toLowerCase();
             const userName = (cell.user || '').toLowerCase();
-            if (seatValue.includes(q) || userName.includes(q)) {
+            if (seatValue.includes(q) || userName.includes(q) || (cell.value === 'c1r1s9' && q === 'c1r9s1')) {
               hasMatchInCurrentPage = true;
               break;
             }
@@ -594,17 +681,16 @@ export default function App() {
 
       // 편의시설 매치도 확인
       if (!hasMatchInCurrentPage) {
-        const floorConfig = rawSeatingData[curFloor];
+        const floorConfig = rawSeatingData['2F'];
         if (floorConfig && floorConfig.mergeCells) {
           for (const mc of floorConfig.mergeCells) {
-            if (curFloor === '2F') {
-              const startCol = mc.startCol;
-              const isC1 = startCol >= 15 && startCol <= 23;
-              const isC2 = startCol >= 2 && startCol <= 11;
-              if (curZone === 'C1' && !isC1) continue;
-              if (curZone === 'C2' && !isC2) continue;
-            }
-            const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim().toLowerCase();
+            const startCol = mc.startCol;
+            const isC1 = startCol >= 15 && startCol <= 23;
+            const isC2 = startCol >= 2 && startCol <= 11;
+            if (curZone === 'C1' && !isC1) continue;
+            if (curZone === 'C2' && !isC2) continue;
+
+            const cleanVal = mc.value.replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '').trim().toLowerCase();
             if (cleanVal.includes(q)) {
               hasMatchInCurrentPage = true;
               break;
@@ -613,90 +699,54 @@ export default function App() {
         }
       }
 
-      // 2. 현재 페이지에 결과가 없다면, 다른 층/구역 탐색하여 첫 매칭 구역으로 자동 전환
+      // 2. 현재 페이지에 결과가 없다면, 다른 구역 탐색하여 첫 매칭 구역으로 자동 전환
       if (!hasMatchInCurrentPage) {
-        let targetFloor = '';
         let targetZone = '';
-        
-        // 3F 탐색
-        const grid3 = gridState['3F'];
-        let matched3 = false;
-        if (grid3) {
-          for (let r = 0; r < grid3.length; r++) {
-            for (let c = 0; c < grid3[r].length; c++) {
-              const cell = grid3[r][c];
+        let matchedC1 = false;
+        let matchedC2 = false;
+
+        // 퍼실리테이터 검색어인 경우 C1 구역으로 직행
+        const facTerms = ['퍼실', '퍼실리테이터', '찹츄', '카피바라', '스카이', '몽키', '워터', '포그', '스턴', 'c1r1s9', 'c1r9s1'];
+        if (facTerms.some(term => q.includes(term) || term.includes(q))) {
+          matchedC1 = true;
+        }
+
+        if (grid && !matchedC1) {
+          for (let r = 0; r < grid.length; r++) {
+            for (let c = 0; c < grid[r].length; c++) {
+              const cell = grid[r][c];
               if (cell.type !== 'seat') continue;
-              if ((cell.value || '').toLowerCase().includes(q) || (cell.user || '').toLowerCase().includes(q)) {
-                matched3 = true;
-                break;
+              const seatValue = (cell.value || '').toLowerCase();
+              const userName = (cell.user || '').toLowerCase();
+              if (seatValue.includes(q) || userName.includes(q) || (cell.value === 'c1r1s9' && q === 'c1r9s1')) {
+                const isC1 = seatValue.startsWith('c1') || (c >= 15 && c <= 23);
+                const isC2 = seatValue.startsWith('c2') || (c >= 2 && c <= 11);
+                if (isC1) matchedC1 = true;
+                if (isC2) matchedC2 = true;
               }
             }
-            if (matched3) break;
           }
-          if (!matched3) {
-            const config3 = rawSeatingData['3F'];
-            if (config3 && config3.mergeCells) {
-              for (const mc of config3.mergeCells) {
-                const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim().toLowerCase();
-                if (cleanVal.includes(q)) {
-                  matched3 = true;
-                  break;
-                }
+          const config = rawSeatingData['2F'];
+          if (config && config.mergeCells) {
+            for (const mc of config.mergeCells) {
+              const cleanVal = mc.value.replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '').trim().toLowerCase();
+              if (cleanVal.includes(q)) {
+                const startCol = mc.startCol;
+                if (startCol >= 15 && startCol <= 23) matchedC1 = true;
+                if (startCol >= 2 && startCol <= 11) matchedC2 = true;
               }
             }
           }
         }
 
-        if (matched3) {
-          targetFloor = '3F';
-        } else {
-          // 5F 탐색
-          const grid5 = gridState['2F'];
-          let matched5C1 = false;
-          let matched5C2 = false;
-          if (grid5) {
-            for (let r = 0; r < grid5.length; r++) {
-              for (let c = 0; c < grid5[r].length; c++) {
-                const cell = grid5[r][c];
-                if (cell.type !== 'seat') continue;
-                const seatValue = (cell.value || '').toLowerCase();
-                const userName = (cell.user || '').toLowerCase();
-                if (seatValue.includes(q) || userName.includes(q)) {
-                  const isC1 = seatValue.startsWith('c1') || (c >= 15 && c <= 23);
-                  const isC2 = seatValue.startsWith('c2') || (c >= 2 && c <= 11);
-                  if (isC1) matched5C1 = true;
-                  if (isC2) matched5C2 = true;
-                }
-              }
-            }
-            const config5 = rawSeatingData['2F'];
-            if (config5 && config5.mergeCells) {
-              for (const mc of config5.mergeCells) {
-                const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim().toLowerCase();
-                if (cleanVal.includes(q)) {
-                  const startCol = mc.startCol;
-                  if (startCol >= 15 && startCol <= 23) matched5C1 = true;
-                  if (startCol >= 2 && startCol <= 11) matched5C2 = true;
-                }
-              }
-            }
-          }
-
-          if (matched5C1) {
-            targetFloor = '2F';
-            targetZone = 'C1';
-          } else if (matched5C2) {
-            targetFloor = '2F';
-            targetZone = 'C2';
-          }
+        if (matchedC1) {
+          targetZone = 'C1';
+        } else if (matchedC2) {
+          targetZone = 'C2';
         }
 
-        // 일치하는 다른 페이지가 있다면 상태 업데이트
-        if (targetFloor) {
-          setActiveFloor(targetFloor);
-          if (targetFloor === '2F') {
-            setActiveZone(targetZone);
-          }
+        if (targetZone && targetZone !== curZone) {
+          setActiveZone(targetZone);
         }
       }
 
@@ -712,12 +762,25 @@ export default function App() {
     }, 300); // 키 입력 멈춤 300ms 후 실행
 
     return () => clearTimeout(timer);
-  }, [searchQuery, isMobile]);
+  }, [searchQuery, isMobile, gridState]);
 
   // 5. 셀 클릭 핸들러
-  const handleCellClick = (cell) => {
-    if (cell.type === 'seat') {
+  const handleCellClick = (cell, mergeInfo) => {
+    if (cell && cell.type === 'seat') {
       setSelectedCell(cell);
+      setIsModalOpen(true);
+    } else if (mergeInfo && checkIsFacilitator(null, mergeInfo)) {
+      const isTable = mergeInfo.startCol === 22;
+      setSelectedCell({
+        type: 'facility',
+        value: isTable ? '테이블' : '회의실',
+        r: mergeInfo.startRow,
+        c: mergeInfo.startCol,
+        occupied: true,
+        isFacilitator: true,
+        user: isTable ? '찹츄, 카피바라, 스카이' : '몽키, 워터, 포그',
+        facilityName: isTable ? '테이블 (퍼실리테이터)' : '회의실 (퍼실리테이터)'
+      });
       setIsModalOpen(true);
     }
   };
@@ -738,9 +801,12 @@ export default function App() {
 
     const cleanQuery = query.replace(/\s+/g, '');
     
-    // 1. 층/구역 키워드 단독 검색 시, 해당 층/구역 전환만 처리하고 토스트 팝업은 띄우지 않음
+    // 1. 층/구역 키워드 단독 검색 시 처리
     if (['3f', '3층'].includes(cleanQuery)) {
-      setActiveFloor('3F');
+      showToast({
+        isSimpleText: true,
+        text: "3층은 현재 운영되지 않습니다."
+      });
       return;
     }
     if (['2f', '2층'].includes(cleanQuery)) {
@@ -759,15 +825,66 @@ export default function App() {
       return;
     }
 
-    // 현재 보고 있는 층을 1순위로 탐색하도록 정렬된 리스트 생성
-    const sortedFloors = [activeFloor, ...floors.filter(f => f !== activeFloor)];
+    // 퍼실리테이터 단독 검색
+    if (['퍼실', '퍼실리테이터'].includes(cleanQuery)) {
+      setActiveFloor('2F');
+      setActiveZone('C1');
+      showToast({
+        isSimpleText: true,
+        text: "2층 퍼실리테이터: 테이블(찹츄, 카피바라, 스카이) · 회의실(몽키, 워터, 포그) · C1R1S9(스턴)"
+      });
+      return;
+    }
 
-    // [1단계] 100% 완전 일치 (Exact Match) 우선 검사
-    // 1-1. 좌석 번호 또는 사용자 이름 완전 일치 검사
-    for (const floor of sortedFloors) {
-      const grid = gridState[floor];
-      if (!grid) continue;
+    // 퍼실리테이터별 전용 정밀 검색
+    // 1) 찹츄, 카피바라, 스카이 -> 테이블 (3,22)
+    if (FACILITATORS.table.names.some(name => name.includes(cleanQuery) || cleanQuery.includes(name))) {
+      setActiveFloor('2F');
+      setActiveZone('C1');
+      setExactMatchKey('3,22');
+      showToast({
+        seatName: '테이블',
+        statusText: '퍼실리테이터 (찹츄, 카피바라, 스카이)',
+        floorDesc: '2층',
+        zoneDesc: ' (C1 구역)',
+        direction: '우측'
+      });
+      return;
+    }
 
+    // 2) 몽키, 워터, 포그 -> 회의실 (3,20)
+    if (FACILITATORS.meetingRoom.names.some(name => name.includes(cleanQuery) || cleanQuery.includes(name))) {
+      setActiveFloor('2F');
+      setActiveZone('C1');
+      setExactMatchKey('3,20');
+      showToast({
+        seatName: '회의실',
+        statusText: '퍼실리테이터 (몽키, 워터, 포그)',
+        floorDesc: '2층',
+        zoneDesc: ' (C1 구역)',
+        direction: '우측'
+      });
+      return;
+    }
+
+    // 3) 스턴, c1r1s9, c1r9s1 -> C1R1S9 (7,23)
+    if (cleanQuery.includes('스턴') || '스턴'.includes(cleanQuery) || cleanQuery.includes('c1r1s9') || cleanQuery.includes('c1r9s1')) {
+      setActiveFloor('2F');
+      setActiveZone('C1');
+      setExactMatchKey('7,23');
+      showToast({
+        seatName: 'C1R1S9',
+        statusText: '퍼실리테이터 스턴님 사용 중',
+        floorDesc: '2층',
+        zoneDesc: ' (C1 구역)',
+        direction: '우측'
+      });
+      return;
+    }
+
+    // [1단계] 일반 좌석 번호 또는 사용자 이름 완전 일치 검사
+    const grid = gridState['2F'];
+    if (grid) {
       for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[r].length; c++) {
           const cell = grid[r][c];
@@ -776,91 +893,79 @@ export default function App() {
           const seatValue = (cell.value || '').toLowerCase();
           const userName = (cell.user || '').toLowerCase();
 
-          if (seatValue === query || userName === query) {
-            setActiveFloor(floor);
-            setExactMatchKey(`${r},${c}`); // 완전 일치하는 정확한 1개 좌석 키 등록
+          if (seatValue === query || userName === query || (cell.value === 'c1r1s9' && query === 'c1r9s1')) {
+            setActiveFloor('2F');
+            setExactMatchKey(`${r},${c}`);
             let targetZone = '';
-            if (floor === '2F') {
-              if (seatValue.startsWith('c1') || (c >= 15 && c <= 23)) {
-                setActiveZone('C1');
-                targetZone = 'C1 구역';
-              } else if (seatValue.startsWith('c2') || (c >= 2 && c <= 11)) {
-                setActiveZone('C2');
-                targetZone = 'C2 구역';
-              }
+            if (seatValue.startsWith('c1') || (c >= 15 && c <= 23)) {
+              setActiveZone('C1');
+              targetZone = 'C1 구역';
+            } else if (seatValue.startsWith('c2') || (c >= 2 && c <= 11)) {
+              setActiveZone('C2');
+              targetZone = 'C2 구역';
             }
 
-            const elevatorCol = floor === '3F' ? 11 : 14;
+            const elevatorCol = 14;
             const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
-            const statusText = cell.occupied ? `${cell.user}님 사용 중` : '공석';
-            const floorDesc = floor === '3F' ? '3층' : '2층';
+            const statusText = cell.isFacilitator
+              ? `퍼실리테이터 ${cell.user || ''}님 지정석`.trim()
+              : cell.occupied ? `${cell.user}님 사용 중` : '공석';
             const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
             showToast({
               seatName: cell.value.toUpperCase(),
               statusText,
-              floorDesc,
+              floorDesc: '2층',
               zoneDesc,
               direction
             });
-            return; // 1단계 완전 매칭 성공 시 즉시 종료
+            return;
           }
         }
       }
     }
 
-    // 1-2. 편의시설 명칭 완전 일치 검사
-    for (const floor of sortedFloors) {
-      const floorConfig = rawSeatingData[floor];
-      if (!floorConfig || !floorConfig.mergeCells) continue;
-
+    // [1단계-2] 편의시설 명칭 완전 일치 검사
+    const floorConfig = rawSeatingData['2F'];
+    if (floorConfig && floorConfig.mergeCells) {
       for (const mc of floorConfig.mergeCells) {
-        const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim().toLowerCase();
+        const cleanVal = mc.value.replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '').trim().toLowerCase();
         if (cleanVal === query) {
-          setActiveFloor(floor);
-          setExactMatchKey(`${mc.startRow},${mc.startCol}`); // 완전 일치하는 편의시설 키 등록
+          setActiveFloor('2F');
+          setExactMatchKey(`${mc.startRow},${mc.startCol}`);
           let targetZone = '';
-          if (floor === '2F') {
-            const startCol = mc.startCol;
-            if (startCol >= 15 && startCol <= 23) {
-              setActiveZone('C1');
-              targetZone = 'C1 구역';
-            } else if (startCol >= 2 && startCol <= 11) {
-              setActiveZone('C2');
-              targetZone = 'C2 구역';
-            }
+          const startCol = mc.startCol;
+          if (startCol >= 15 && startCol <= 23) {
+            setActiveZone('C1');
+            targetZone = 'C1 구역';
+          } else if (startCol >= 2 && startCol <= 11) {
+            setActiveZone('C2');
+            targetZone = 'C2 구역';
           }
 
-          const elevatorCol = floor === '3F' ? 11 : 14;
+          const elevatorCol = 14;
           const direction = (mc.startCol <= elevatorCol && mc.endCol >= elevatorCol)
             ? '중앙'
             : mc.startCol < elevatorCol
             ? '좌측'
             : '우측';
-          const floorDesc = floor === '3F' ? '3층' : '2층';
           const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
           showToast({
             seatName: cleanVal,
             statusText: '공용시설',
-            floorDesc,
+            floorDesc: '2층',
             zoneDesc,
             direction
           });
-          return; // 1단계 편의시설 완전 매칭 성공 시 즉시 종료
+          return;
         }
       }
     }
 
-    // [2단계] 부분 일치 (Partial Match, includes) 백업 검사
-    // 단순 구역 식별자인 'c5', 'c6' 등은 위 1번 분기에서 처리되었으나,
-    // 오작동 방지를 위해 부분 매칭 검색어로 구역 접두사만 오는 경우는 부분 매치에서 제외합니다.
+    // [2단계] 부분 일치 검사
     if (!['c1', 'c2', 'c1-', 'c2-'].includes(query)) {
-      // 2-1. 좌석 번호 또는 사용자 이름 부분 일치 검사
-      for (const floor of sortedFloors) {
-        const grid = gridState[floor];
-        if (!grid) continue;
-
+      if (grid) {
         for (let r = 0; r < grid.length; r++) {
           for (let c = 0; c < grid[r].length; c++) {
             const cell = grid[r][c];
@@ -869,76 +974,68 @@ export default function App() {
             const seatValue = (cell.value || '').toLowerCase();
             const userName = (cell.user || '').toLowerCase();
 
-            if (seatValue.includes(query) || userName.includes(query)) {
-              setActiveFloor(floor);
+            if (seatValue.includes(query) || userName.includes(query) || (cell.value === 'c1r1s9' && query.includes('c1r9s1'))) {
+              setActiveFloor('2F');
               let targetZone = '';
-              if (floor === '2F') {
-                if (seatValue.startsWith('c1') || (c >= 15 && c <= 23)) {
-                  setActiveZone('C1');
-                  targetZone = 'C1 구역';
-                } else if (seatValue.startsWith('c2') || (c >= 2 && c <= 11)) {
-                  setActiveZone('C2');
-                  targetZone = 'C2 구역';
-                }
+              if (seatValue.startsWith('c1') || (c >= 15 && c <= 23)) {
+                setActiveZone('C1');
+                targetZone = 'C1 구역';
+              } else if (seatValue.startsWith('c2') || (c >= 2 && c <= 11)) {
+                setActiveZone('C2');
+                targetZone = 'C2 구역';
               }
 
-              const elevatorCol = floor === '3F' ? 11 : 14;
+              const elevatorCol = 14;
               const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
-              const statusText = cell.occupied ? `${cell.user}님 사용 중` : '공석';
-              const floorDesc = floor === '3F' ? '3층' : '2층';
+              const statusText = cell.isFacilitator
+                ? `퍼실리테이터 ${cell.user || ''}님 지정석`.trim()
+                : cell.occupied ? `${cell.user}님 사용 중` : '공석';
               const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
               showToast({
                 seatName: cell.value.toUpperCase(),
                 statusText,
-                floorDesc,
+                floorDesc: '2층',
                 zoneDesc,
                 direction
               });
-              return; // 부분 매칭 성공 시 즉시 종료
+              return;
             }
           }
         }
       }
 
-      // 2-2. 편의시설 명칭 부분 일치 검사
-      for (const floor of sortedFloors) {
-        const floorConfig = rawSeatingData[floor];
-        if (!floorConfig || !floorConfig.mergeCells) continue;
-
+      if (floorConfig && floorConfig.mergeCells) {
         for (const mc of floorConfig.mergeCells) {
-          const cleanVal = mc.value.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim().toLowerCase();
+          const cleanVal = mc.value.replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '').trim().toLowerCase();
           if (cleanVal.includes(query)) {
-            setActiveFloor(floor);
+            setActiveFloor('2F');
             let targetZone = '';
-            if (floor === '2F') {
-              const startCol = mc.startCol;
-              if (startCol >= 15 && startCol <= 23) {
-                setActiveZone('C1');
-                targetZone = 'C1 구역';
-              } else if (startCol >= 2 && startCol <= 11) {
-                setActiveZone('C2');
-                targetZone = 'C2 구역';
-              }
+            const startCol = mc.startCol;
+            if (startCol >= 15 && startCol <= 23) {
+              setActiveZone('C1');
+              targetZone = 'C1 구역';
+            } else if (startCol >= 2 && startCol <= 11) {
+              setActiveZone('C2');
+              targetZone = 'C2 구역';
             }
 
-            const elevatorCol = floor === '3F' ? 11 : 14;
+            const elevatorCol = 14;
             const direction = (mc.startCol <= elevatorCol && mc.endCol >= elevatorCol)
               ? '중앙'
               : mc.startCol < elevatorCol
               ? '좌측'
               : '우측';
-            const floorDesc = floor === '3F' ? '3층' : '2층';
             const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
             showToast({
               seatName: cleanVal,
               statusText: '공용시설',
-              floorDesc,
+              floorDesc: '2층',
               zoneDesc,
               direction
             });
-            return; // 부분 매칭 성공 시 즉시 종료
+            return;
           }
         }
       }
@@ -950,21 +1047,6 @@ export default function App() {
       text: "일치하는 좌석이나 퍼실리테이터를 찾을 수 없습니다."
     });
   };
-
-  // 6. 현재 층의 통계 계산
-  const stats = useMemo(() => {
-    let total = 0;
-    let occupied = 0;
-    currentGrid.forEach((row) => {
-      row.forEach((cell) => {
-        if (cell.type === 'seat') {
-          total++;
-          if (cell.occupied) occupied++;
-        }
-      });
-    });
-    return { total, occupied, available: total - occupied };
-  }, [currentGrid]);
 
   return (
     <div className="app-container">
@@ -1166,74 +1248,24 @@ export default function App() {
                   : `repeat(${currentFloorConfig?.dimensions?.cols || 1}, minmax(50px, 1fr))`
               }}
             >
-          {/* CLUSTER 컴퓨터 좌석 및 회의 공간 통합 구역 패널 배경 */}
-          {activeFloor === '3F' && (
+          {/* 2F CLUSTER 구역 패널 배경 */}
+          {activeZone === 'C2' && (
             <div
               className="zone-panel-bg"
               style={{
-                gridRow: '4 / 19',
-                gridColumn: '2 / 11'
+                gridRow: '8 / 16',
+                gridColumn: `${colMap[2]} / ${colMap[11] + 1}`
               }}
             />
           )}
-          {activeFloor === '2F' && (
-            <>
-              {/* C6 구역 (좌측) */}
-              {activeZone === 'C2' && (
-                <div
-                  className="zone-panel-bg"
-                  style={{
-                    gridRow: '8 / 16',
-                    gridColumn: `${colMap[2]} / ${colMap[11] + 1}`
-                  }}
-                />
-              )}
-              {/* C5 구역 (우측) */}
-              {activeZone === 'C1' && (
-                <div
-                  className="zone-panel-bg"
-                  style={{
-                    gridRow: '8 / 16',
-                    gridColumn: `${colMap[15]} / ${colMap[23] + 1}`
-                  }}
-                />
-              )}
-            </>
-          )}
-
-          {/* ㄱ자 회전형 (L자형) 통합 사용불가 영역 (물리적으로 단 하나의 SVG 컴포넌트로 병합) */}
-          {activeFloor === '3F' && (
+          {activeZone === 'C1' && (
             <div
-              className="restricted-l-zone"
+              className="zone-panel-bg"
               style={{
-                gridRow: '6 / 19',
-                gridColumn: `${colMap[11] + 1} / ${colMap[16] + 2}`,
-                position: 'relative',
-                zIndex: 2
+                gridRow: '8 / 16',
+                gridColumn: `${colMap[15]} / ${colMap[23] + 1}`
               }}
-            >
-              <svg width="100%" height="100%" viewBox="0 0 50 130" preserveAspectRatio="none" style={{ display: 'block' }}>
-                <defs>
-                  <pattern id="restricted-stripe" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                    <line x1="0" y1="0" x2="0" y2="8" stroke="hsla(350, 80%, 55%, 0.15)" strokeWidth="2" />
-                  </pattern>
-                </defs>
-                <path
-                  d="M 0.5,0.5 L 49.5,0.5 L 49.5,69.5 L 23.5,69.5 L 23.5,129.5 L 0.5,129.5 Z"
-                  fill="url(#restricted-stripe)"
-                  stroke="hsla(350, 80%, 55%, 0.3)"
-                  strokeWidth="1.5"
-                  style={{ vectorEffect: 'non-scaling-stroke' }}
-                />
-              </svg>
-              <div className="restricted-l-content" style={{ top: '30%' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#f87171' }}>
-                  <AreaIcon name="사용불가" size={12} />
-                  <span style={{ fontWeight: '700', fontSize: '10px', marginTop: '2px' }}>사용불가</span>
-                  <span style={{ display: 'block', fontSize: '9px', color: 'var(--text-secondary)', marginTop: '1px' }}>LUNA</span>
-                </div>
-              </div>
-            </div>
+            />
           )}
 
           {currentGrid.map((row, rIdx) =>
@@ -1243,78 +1275,7 @@ export default function App() {
                 return null;
               }
 
-              // 3층 회의 공간 위아래 8개 자리 가로 배치 보정
-              if (activeFloor === '3F' && (cIdx === 2 || cIdx === 10)) {
-                if (rIdx === 7 || rIdx === 16) {
-                  const sIdxStart = rIdx;
-                  const seat1 = currentGrid[sIdxStart][cIdx];
-                  const seat2 = currentGrid[sIdxStart + 1][cIdx];
-                  const seats = [seat1, seat2];
-
-                  return (
-                    <div
-                      key={`meeting-col-horizontal-${rIdx}-${cIdx}`}
-                      style={{
-                        gridRow: `${sIdxStart + 1} / span 2`,
-                        gridColumn: `${colMap[cIdx]}`,
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '3px',
-                        height: '100%',
-                        width: '100%',
-                        boxSizing: 'border-box'
-                      }}
-                    >
-                      {seats.map((sCell) => {
-                        const cellKey = `${sCell.r},${sCell.c}`;
-                        const isMatch = !!matchMap[cellKey];
-                        // 구역명과 행열 좌표 사이 개행(\n)을 명시적으로 넣어 좁은 폭에서 2줄로 표시되도록 보정
-                        const displayValue = sCell.value
-                          .replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '')
-                          .trim()
-                          .replace(/([a-zA-Z0-9]+)(r[0-9]+s[0-9]+)/i, '$1\n$2');
-                        const isFacilitator = sCell.value.includes('r7') || sCell.value.includes('r6');
-
-                        const cellClasses = [
-                          'grid-cell',
-                          'seat',
-                          'narrow-seat',
-                          sCell.occupied ? 'occupied' : '',
-                          isFacilitator ? 'facilitator' : '',
-                          isMatch ? 'highlighted' : '',
-                        ].filter(Boolean).join(' ');
-
-                        return (
-                          <div
-                            key={cellKey}
-                            className={cellClasses}
-                            style={{
-                              flex: 1,
-                              height: '100%',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              zIndex: isMatch ? 15 : 2
-                            }}
-                            onClick={() => handleCellClick(sCell)}
-                            title={`${displayValue} ${isFacilitator ? '(퍼실리테이터)' : ''} ${sCell.occupied ? `(${sCell.user})` : ''}`.trim()}
-                          >
-                            <span className="cell-text">
-                              {displayValue}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                }
-                if (rIdx === 8 || rIdx === 17) {
-                  return null; // 개별 렌더링 스킵
-                }
-              }
-
-              // activeZone이 C5일 때 비상구 및 C6 구역(1~11열)을 뭉침 블록 1개로 대체 (비상구 높이인 6행부터 15행까지 확장)
+              // activeZone이 C1일 때 비상구 및 C2 구역(1~11열)을 뭉침 블록 1개로 대체
               if (activeFloor === '2F' && activeZone === 'C1' && cIdx >= 1 && cIdx <= 11) {
                 if (cIdx === 2 && rIdx === 5) {
                   return (
@@ -1336,15 +1297,13 @@ export default function App() {
                     </div>
                   );
                 }
-                // return null; // 나머지 C6 셀들은 렌더링 스킵
-                // 화장실은 복도 왼쪽에 걸쳐 있으므로 C1 화면에서도 계속 노출
                 // 화장실(3행)과 그 아래 가로 복도(5행)는 C1 화면에서도 계속 노출
                 if (!(cIdx === 11 && (rIdx === 3 || rIdx === 5))) {
                   return null; // 나머지 C2 셀들은 렌더링 스킵
                 }
               }
 
-              // activeZone이 C5일 때 C5 구역(15~23열)의 7개 좌석들을 8행~15행 영역에 세로로 가득 차게 flexbox로 렌더링
+              // activeZone이 C1일 때 C1 구역(15~23열)의 7개 좌석들을 8행~15행 영역에 세로로 가득 차게 flexbox로 렌더링
               if (activeFloor === '2F' && activeZone === 'C1' && cIdx >= 15 && cIdx <= 23) {
                 if (rIdx === 7) {
                   const seatsInCol = [];
@@ -1372,6 +1331,8 @@ export default function App() {
                         
                         // 하이라이트 매칭 정보
                         const isMatch = !!matchMap[cellKey];
+                        const isFacilitator = checkIsFacilitator(cCell, null);
+
                         const customStyle = {
                           flex: 1,
                           width: '100%',
@@ -1383,13 +1344,14 @@ export default function App() {
                         };
 
                         const displayValue = rawDisplayValue
-                          .replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '')
+                          .replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '')
                           .trim();
                         
                         const cellClasses = [
                           'grid-cell',
                           cellType,
                           cCell.occupied ? 'occupied' : '',
+                          isFacilitator ? 'facilitator' : '',
                           isMatch ? 'highlighted' : '',
                         ].filter(Boolean).join(' ');
 
@@ -1399,10 +1361,15 @@ export default function App() {
                             className={cellClasses}
                             style={customStyle}
                             onClick={() => handleCellClick(cCell)}
-                            title={`${displayValue} ${cCell.occupied ? `(${cCell.user})` : ''}`.trim()}
+                            title={`${displayValue} ${isFacilitator ? '(퍼실리테이터)' : ''} ${cCell.occupied ? `(${cCell.user})` : ''}`.trim()}
                           >
                             <span className="cell-text">
                               {displayValue}
+                              {cCell.user === '스턴' && (
+                                <span className="cell-subtext" style={{ fontSize: '0.72em', opacity: 0.95, fontWeight: 700, display: 'block' }}>
+                                  스턴
+                                </span>
+                              )}
                             </span>
                           </div>
                         );
@@ -1476,7 +1443,7 @@ export default function App() {
                     
                     if (isHorizontal) {
                       // 중앙 세로 복도의 우측에 배치된 가로 복도는 왼쪽으로 자연스럽게 결합되도록 horizontal-left 클래스 부여
-                      const centerCol = activeFloor === '3F' ? 11 : 14;
+                      const centerCol = 14;
                       corridorDir = mergeInfo.startCol >= centerCol ? 'horizontal-left' : 'horizontal';
                     } else {
                       corridorDir = 'vertical';
@@ -1494,9 +1461,7 @@ export default function App() {
               }
 
               // 유니코드 텍스트 이모지 제거하여 깨끗한 텍스트 추출
-              /* eslint-disable no-misleading-character-class */
-              const displayValue = rawDisplayValue.replace(/[🛗👥🪜🚻🏝️🚷🎬🪑]/gu, '').trim();
-              /* eslint-enable no-misleading-character-class */
+              const displayValue = rawDisplayValue.replace(/(?:🛗|👥|🪜|🚻|🏝️?|🚷|🎬|🪑)/gu, '').trim();
 
               const isMatch = !!matchMap[key];
 
@@ -1504,7 +1469,7 @@ export default function App() {
                 customStyle.zIndex = 15;
               }
 
-              const isFacilitator = (activeFloor === '2F' && mergeInfo?.isStart && mergeInfo.startRow === 3 && (mergeInfo.startCol === 20 || mergeInfo.startCol === 22));
+              const isFacilitator = checkIsFacilitator(cell, mergeInfo);
               const isDimmed = activeFloor === '2F' && cell.type === 'seat' && (
                 (activeZone === 'C1' && cell.value.startsWith('c2')) ||
                 (activeZone === 'C2' && cell.value.startsWith('c1'))
@@ -1521,20 +1486,13 @@ export default function App() {
                 isExit ? 'exit-cell' : '',
               ].filter(Boolean).join(' ');
 
-              if (activeFloor === '3F' && cIdx >= 12) {
-                const isSeminar = rIdx >= 12 && rIdx <= 17 && cIdx >= 15 && cIdx <= 16;
-                if (!isSeminar) {
-                  return null;
-                }
-              }
-
               return (
                 <div
                   key={key}
                   className={cellClasses}
                   style={customStyle}
-                  onClick={() => !isDimmed && handleCellClick(cell)}
-                  title={cell.type === 'seat' ? `${displayValue} ${isFacilitator ? '(퍼실리테이터)' : ''} ${cell.occupied ? `(${cell.user})` : ''}`.trim() : displayValue}
+                  onClick={() => !isDimmed && handleCellClick(cell, mergeInfo)}
+                  title={cell.type === 'seat' ? `${displayValue} ${isFacilitator ? '(퍼실리테이터)' : ''} ${cell.occupied ? `(${cell.user})` : ''}`.trim() : (isFacilitator ? `${displayValue} (퍼실리테이터)` : displayValue)}
                 >
                   {/* 편의시설/제한시설인 경우 세련된 플랫 벡터 아이콘 주입 */}
                   {cellType !== 'seat' && cellType !== 'empty' && (cellType !== 'corridor' || rawDisplayValue.includes('테이블')) && (
@@ -1559,12 +1517,28 @@ export default function App() {
       {isMobile && (
         <>
           {scrollIndicators.left && (
-            <div className="scroll-indicator indicator-left">
+            <div
+              className="scroll-indicator indicator-left"
+              onClick={() => {
+                const step = viewDirection === 'stairs' ? 160 : -160;
+                mapViewportRef.current?.scrollBy({ left: step, behavior: 'smooth' });
+              }}
+              style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+              title="왼쪽으로 스크롤"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
             </div>
           )}
           {scrollIndicators.right && (
-            <div className="scroll-indicator indicator-right">
+            <div
+              className="scroll-indicator indicator-right"
+              onClick={() => {
+                const step = viewDirection === 'stairs' ? -160 : 160;
+                mapViewportRef.current?.scrollBy({ left: step, behavior: 'smooth' });
+              }}
+              style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+              title="오른쪽으로 스크롤"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
           )}
@@ -1606,12 +1580,12 @@ export default function App() {
             <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
             
             <div className="modal-header">
-              {activeFloor === '3F' && (selectedCell.value.includes('r7') || selectedCell.value.includes('r6')) && (
+              {(selectedCell.isFacilitator || selectedCell.value === 'c1r1s9' || selectedCell.value === 'c1r9s1' || selectedCell.user === '스턴') && (
                 <span className="modal-tag" style={{ background: 'rgba(251, 146, 60, 0.15)', color: '#fb923c', border: '1px solid rgba(251, 146, 60, 0.3)' }}>
-                  퍼실리테이터 지정석
+                  {selectedCell.type === 'facility' ? '퍼실리테이터 공용 공간' : '퍼실리테이터 지정석'}
                 </span>
               )}
-              <h2 className="modal-title">{selectedCell.value.toUpperCase()} 좌석 정보</h2>
+              <h2 className="modal-title">{selectedCell.facilityName || `${selectedCell.value?.toUpperCase()} 좌석 정보`}</h2>
             </div>
 
             <div className="modal-body">
@@ -1622,9 +1596,16 @@ export default function App() {
                 </span>
               </div>
               
-              {selectedCell.occupied && selectedCell.user && (
+              {selectedCell.type === 'facility' && selectedCell.user && (
                 <div className="info-row">
-                  <span className="info-label">현재 입실자</span>
+                  <span className="info-label">퍼실리테이터</span>
+                  <span className="info-value">{selectedCell.user}</span>
+                </div>
+              )}
+
+              {selectedCell.type === 'seat' && selectedCell.occupied && selectedCell.user && (
+                <div className="info-row">
+                  <span className="info-label">{selectedCell.isFacilitator ? '담당 퍼실리테이터' : '현재 입실자'}</span>
                   <span className="info-value">{selectedCell.user}</span>
                 </div>
               )}

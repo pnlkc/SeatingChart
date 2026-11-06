@@ -1283,7 +1283,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none; /* 클릭 방해 금지 */
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35), 0 0 10px rgba(139, 92, 246, 0.2);
 }
 
@@ -1345,17 +1347,10 @@
   transform: rotate(180deg);
 }
 
-/* 3층 L자 제한구역의 절대 중앙정렬 offset을 유지하며 역회전 보정 */
-.map-viewport[style*="rotate(180deg)"] .restricted-l-content {
-  transform: translate(-50%, -50%) rotate(180deg) !important;
-}
-
 /* 180도 회전 시 글자 아래에 아이콘이 가려지거나 뒤집히는 레이아웃 정렬 보정 */
 .map-viewport[style*="rotate(180deg)"] .grid-cell {
   flex-direction: column-reverse !important;
 }
-
-/* 180도 회전 시 3층 L자 제한구역의 텍스트가 경계 밖으로 깨지지 않고 넓은 구역에 안착되도록 오프셋 변경 - 부모가 회전하면서 로컬 top: 30%가 물리적으로 하단에 자동 위치하므로 보정 제거 */
 
 /* 180도 회전 시 5층 뭉침 구역 블록의 역회전 및 텍스트 상하 순서 보정 - 블록 전체를 역회전시켰으므로 내부 순서는 정방향과 동일하게 column 유지 */
 .map-viewport[style*="rotate(180deg)"] .collapsed-zone-block {
