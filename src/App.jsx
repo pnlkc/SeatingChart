@@ -880,7 +880,7 @@ export default function App() {
       setExactMatchKey('7,23');
       showToast({
         seatName: 'C1R1S9',
-        statusText: '퍼실리테이터 스턴님 사용 중',
+        statusText: '퍼실리테이터 스턴',
         floorDesc: '2층',
         zoneDesc: ' (C1 구역)',
         direction: '우측'
@@ -914,7 +914,7 @@ export default function App() {
             const elevatorCol = 14;
             const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
             const statusText = cell.isFacilitator
-              ? `퍼실리테이터 ${cell.user || ''}님 지정석`.trim()
+              ? `퍼실리테이터 ${cell.user || ''} 지정석`.trim()
               : cell.occupied ? `${cell.user}님 사용 중` : '공석';
             const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
@@ -994,7 +994,7 @@ export default function App() {
               const elevatorCol = 14;
               const direction = c === elevatorCol ? '중앙' : c < elevatorCol ? '좌측' : '우측';
               const statusText = cell.isFacilitator
-                ? `퍼실리테이터 ${cell.user || ''}님 지정석`.trim()
+                ? `퍼실리테이터 ${cell.user || ''} 지정석`.trim()
                 : cell.occupied ? `${cell.user}님 사용 중` : '공석';
               const zoneDesc = targetZone ? ` (${targetZone})` : '';
 
