@@ -825,13 +825,19 @@ export default function App() {
       return;
     }
 
-    // 퍼실리테이터 단독 검색
-    if (['퍼실', '퍼실리테이터'].includes(cleanQuery)) {
+    // 퍼실리테이터 일반 검색 (이름 미명시 시 위치만 안내)
+    const isGenericFacilitator = ['퍼실', '퍼실리테이터', '퍼실위치', '퍼실리테이터위치', '퍼실자리', '퍼실좌석'].includes(cleanQuery) ||
+      (cleanQuery.includes('퍼실') &&
+       !FACILITATORS.table.names.some(name => cleanQuery.includes(name)) &&
+       !FACILITATORS.meetingRoom.names.some(name => cleanQuery.includes(name)) &&
+       !cleanQuery.includes('스턴'));
+
+    if (isGenericFacilitator) {
       setActiveFloor('2F');
       setActiveZone('C1');
       showToast({
         isSimpleText: true,
-        text: "2층 퍼실리테이터: 테이블(찹츄, 카피바라, 스카이) · 회의실(몽키, 워터, 포그) · C1R1S9(스턴)"
+        text: "2층 퍼실리테이터 위치: 테이블 · 회의실 · C1R1S9"
       });
       return;
     }
